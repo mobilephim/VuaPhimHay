@@ -100,7 +100,10 @@ public class MainActivity extends AppCompatActivity
                     listfilm.add(new FilmMaster(
                             obj.getString("name"),
                             obj.getString("thumb"),
-                            obj.getString("url")
+                            obj.getString("url"),
+                            obj.getString("type"),
+                            obj.getString("year"),
+                            obj.getString("decs")
                     ));
                 }
                 //Toast.makeText(getApplicationContext(),""+listfilm.size(),Toast.LENGTH_SHORT).show();
@@ -117,6 +120,10 @@ public class MainActivity extends AppCompatActivity
                         //Toast.makeText(getApplicationContext(), "" + listfilm.get(position).getLink(), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(MainActivity.this, Activity_Content.class);
                         intent.putExtra("urls", listfilm.get(position).getLink());
+                        intent.putExtra("name",listfilm.get(position).getName());
+                        intent.putExtra("type",listfilm.get(position).getType());
+                        intent.putExtra("year",listfilm.get(position).getYear());
+                        intent.putExtra("decs",listfilm.get(position).getDecs());
                         startActivity(intent);
                     }
                 });
@@ -221,7 +228,7 @@ public class MainActivity extends AppCompatActivity
         return content.toString();
     }
 
-    // kiem tra ket noi mang vcvvvcvAAAAA
+    // kiem tra ket noi mang
     public boolean isConnected() {
         ConnectivityManager cm =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
