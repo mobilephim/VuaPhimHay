@@ -22,10 +22,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
         <activity
             android:name=".Activity_Content"
             android:configChanges="orientation|screenSize"
             android:parentActivityName=".MainActivity" />
+=======
+        <activity android:name=".Activity_Content"></activity>
+        <activity
+            android:name=".menu_bar"
+            android:label="@string/app_name" >
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+        android:value=".Activity_Content" />
+    </activity>
+>>>>>>> origin/master
     </application>
 
 </manifest>

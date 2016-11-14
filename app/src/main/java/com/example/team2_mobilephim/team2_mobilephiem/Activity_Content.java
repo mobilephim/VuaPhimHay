@@ -5,12 +5,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+<<<<<<< HEAD
+=======
+import android.view.MenuItem;
+>>>>>>> origin/master
 import android.widget.MediaController;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.VideoView;
 
-public class Activity_Content extends AppCompatActivity {
+public class Activity_Content extends AppCompatActivity  {
     TabHost tabhost;
     VideoView vview;
     MediaController mediaController;
@@ -21,6 +25,7 @@ public class Activity_Content extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_content);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         TabHost host = (TabHost) findViewById(R.id.tabHost);
         ten = (TextView) findViewById(R.id.tvphim);
         theloai = (TextView) findViewById(R.id.tvtheloai);
@@ -79,5 +84,21 @@ public class Activity_Content extends AppCompatActivity {
         getSupportActionBar().setTitle(name);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         return true;
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.home) {
+            this.finish();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

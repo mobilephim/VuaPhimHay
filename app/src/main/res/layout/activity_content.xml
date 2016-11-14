@@ -1,16 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Activity_Content">
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="215dp"
+        android:orientation="horizontal"
+        android:id="@+id/ll">
+        <VideoView
+            android:id="@+id/videoView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+<<<<<<< HEAD
 
         <VideoView
             android:id="@+id/videoView"
@@ -22,36 +29,149 @@
             android:layout_marginBottom="3dp"/>
 
         <LinearLayout
+=======
+        <TabHost
+            android:id="@+id/tabHost"
+>>>>>>> origin/master
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TabHost
-                android:id="@+id/tabHost"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true">
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true">
+                android:orientation="vertical">
 
-                <LinearLayout
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></TabWidget>
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <FrameLayout
+                    android:id="@android:id/tabcontent"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layout_height="match_parent">
 
-
-                    <TabWidget
-                        android:id="@android:id/tabs"
+                    <LinearLayout
+                        android:id="@+id/tab1"
                         android:layout_width="match_parent"
+<<<<<<< HEAD
                         android:layout_height="wrap_content"
                         android:background="@color/blacklight"
                         android:backgroundTint="@android:color/background_light"></TabWidget>
                     <ScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+=======
+                        android:layout_height="258dp"
+                        android:background="#263238"
+                        android:orientation="vertical">
 
-                        <FrameLayout
-                            android:id="@android:id/tabcontent"
+                        <LinearLayout
+                            android:id="@+id/info"
                             android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#263238"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Tên phim :"
+                                android:textColor="#FFF"
+                                android:paddingTop="20dp"
+                                android:paddingLeft="10dp"
+                                ></TextView>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="#FFF"
+                                android:paddingTop="20dp"
+                                android:paddingLeft="10dp"
+                                android:id="@+id/Txtphim"></TextView>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/info1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#263238"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Thể loại :"
+                                android:textColor="#FFF"
+                                android:paddingTop="20dp"
+                                android:paddingLeft="10dp"
+                                ></TextView>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="#FFF"
+                                android:paddingTop="20dp"
+                                android:paddingLeft="10dp"
+                                android:id="@+id/txttheloai"></TextView>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/info2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#263238"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Năm Sản Xuất :"
+                                android:textColor="#FFF"
+                                android:paddingTop="20dp"
+                                android:paddingLeft="10dp"
+                                ></TextView>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="#FFF"
+                                android:paddingTop="20dp"
+                                android:paddingLeft="10dp"
+                                android:id="@+id/txtnam">
+
+                            </TextView>
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Mô Tả "
+                            android:textColor="#FFF"
+                            android:paddingTop="20dp"
+                            android:paddingLeft="10dp"
+                            ></TextView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#FFF"
+                            android:paddingTop="20dp"
+                            android:paddingLeft="10dp"
+                            android:id="@+id/txtmota"></TextView>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/tab2"
+>>>>>>> origin/master
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#263238"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+<<<<<<< HEAD
                             android:layout_height="match_parent">
 
                             <LinearLayout
@@ -167,9 +287,17 @@
                         </FrameLayout>
                     </ScrollView>
                 </LinearLayout>
+=======
+                            android:layout_height="match_parent"
+                            android:text="" />
+                    </LinearLayout>
+
+                </FrameLayout>
+            </ScrollView>
+            </LinearLayout>
+>>>>>>> origin/master
             </TabHost>
 
-        </LinearLayout>
 
     </LinearLayout>
 
