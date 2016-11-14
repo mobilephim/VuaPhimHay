@@ -221,7 +221,7 @@ public class MainActivity extends AppCompatActivity
         return content.toString();
     }
 
-    // kiem tra ket noi mang
+    // kiem tra ket noi mang vcvvvcvAAAAA
     public boolean isConnected() {
         ConnectivityManager cm =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
