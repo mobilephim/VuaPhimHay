@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/phimhot"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Phim hot" />
+        <item
+            android:id="@+id/phimle"
+            android:icon="@drawable/ic_laptop_black_24dp"
+
+            android:title="Phim Lẻ" />
+        <item
+            android:id="@+id/phimbo"
+            android:icon="@drawable/ic_favorite_border_black_24dp"
+            android:title="Phim Yêu thich" />
+        <item
+            android:id="@+id/phimchieurap"
+            android:icon="@drawable/ic_video_call_black_24dp"
+            android:title="Phim Chiếu Rạp" />
+    </group>
+
+
+    <item
+        android:id="@+id/hanhdong"
+        android:icon="@drawable/ic_ondemand_video_black_24dp"
+        android:title="Hành Động" />
+
+
+    <item
+        android:id="@+id/tinhcam"
+        android:icon="@drawable/ic_subscriptions_black_24dp"
+        android:title="Tình Cảm" />
+    <item
+        android:id="@+id/hoathinh"
+        android:icon="@drawable/tinhcam"
+        android:title="Hoạt Hình" />
+    <item
+        android:id="@+id/kiemhiep"
+        android:icon="@drawable/tinhcam2"
+        android:title="Kiếm Hiệp" />
+    <item
+        android:id="@+id/thoat"
+        android:background="#BBBBBB"
+        android:icon="@drawable/ic_exit_to_app_black_24dp"
+        android:title="Thoát" />
+
+
+</menu>
