@@ -1,10 +1,8 @@
 package com.example.team2_mobilephim.team2_mobilephiem;
 
-import android.app.Activity;
-import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -17,17 +15,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -70,7 +63,8 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         // thuc thi kiem tra ket noi internet
-        isConnected();
+        checkInternetConnection();
+
 
         view = (GridView) findViewById(R.id.grid_view);
         // thuc thi clas docJSON
@@ -84,6 +78,19 @@ public class MainActivity extends AppCompatActivity
     }
 
     class docJSON extends AsyncTask<String, Integer, String> {
+        ProgressDialog pbloading;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pbloading = new ProgressDialog(MainActivity.this);
+            pbloading.setMessage("Đang tải phim...");
+            pbloading.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            pbloading.setCancelable(true);
+            pbloading.setCanceledOnTouchOutside(false);
+            pbloading.show();
+
+        }
 
         @Override
         protected String doInBackground(String... params) {
@@ -94,6 +101,7 @@ public class MainActivity extends AppCompatActivity
         protected void onPostExecute(String s) {
             //Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();
             try {
+                pbloading.dismiss();
                 JSONArray mangjson = new JSONArray(s);
                 for (int i = 0; i < mangjson.length(); i++) {
                     JSONObject obj = mangjson.getJSONObject(i);
@@ -124,6 +132,7 @@ public class MainActivity extends AppCompatActivity
                         intent.putExtra("type",listfilm.get(position).getType());
                         intent.putExtra("year",listfilm.get(position).getYear());
                         intent.putExtra("decs",listfilm.get(position).getDecs());
+                        pbloading.dismiss();
                         startActivity(intent);
                     }
                 });
@@ -239,42 +248,30 @@ public class MainActivity extends AppCompatActivity
         return false;
     }
 
-    // tao diag log kiem tra mang
-    public void showDialog(Activity activity, String msg, int a) {
-        final Dialog dialog = new Dialog(activity);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(false);
-        dialog.setContentView(R.layout.custom_dialog);
+    private boolean checkInternetConnection() {
+        // Lấy ra bộ quản lý kết nối.
+        ConnectivityManager connManager =
+                (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        // Định dạng chiều cao và chiều rộng cho dialog
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        lp.copyFrom(dialog.getWindow().getAttributes());
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        // căn giữa các đối tượng
-        lp.gravity = Gravity.CENTER;
-        dialog.getWindow().setAttributes(lp);
+        // Thông tin mạng đang kích hoạt.
+        NetworkInfo networkInfo = connManager.getActiveNetworkInfo();
 
-        TextView text = (TextView) dialog.findViewById(R.id.text_dialog);
-        text.setText(msg);
-        ImageView imgIcon = (ImageView) dialog.findViewById(R.id.imgIcon);
-        if (a == 1) {
-            // đổi màu backgroud cho imageview dialog
-            imgIcon.setBackgroundColor(Color.rgb(60, 190, 57));
-            // đổi ảnh trong ImageView trong Dialog
-            imgIcon.setImageResource(R.drawable.ic_collections_3x);
-        } else {
-            imgIcon.setBackgroundColor(Color.rgb(218, 95, 106));
-            imgIcon.setImageResource(R.drawable.ic_collections_2x);
+        if (networkInfo == null) {
+            Toast.makeText(this, "Không có kết nối vui lòng thử lại", Toast.LENGTH_LONG).show();
+            return false;
         }
 
-        Button dialogButton = (Button) dialog.findViewById(R.id.btn_dialog);
-        dialogButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
+        if (!networkInfo.isConnected()) {
+            Toast.makeText(this, "Đã kết nối", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        if (!networkInfo.isAvailable()) {
+            Toast.makeText(this, "Kết nối không khả dụng", Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        return true;
     }
+
 }
