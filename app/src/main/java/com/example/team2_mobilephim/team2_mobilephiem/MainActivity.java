@@ -11,9 +11,11 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,12 +34,13 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 
+import Database.DatabasePhim;
 import controller.FilmMaster;
 import customadapter.CustomList;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-
+        implements NavigationView.OnNavigationItemSelectedListener, SearchView.OnQueryTextListener {
+    private SearchView searchView;
     DrawerLayout drawer;
     FragmentManager fragmentManager;
     GridView view;
@@ -64,6 +67,8 @@ public class MainActivity extends AppCompatActivity
 
         // thuc thi kiem tra ket noi internet
         checkInternetConnection();
+        DatabasePhim databasePhim = new DatabasePhim(this);
+
 
 
         view = (GridView) findViewById(R.id.grid_view);
@@ -75,6 +80,31 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        newText = newText.toLowerCase();
+        ArrayList<FilmMaster>  newlist = new ArrayList<>();
+        for(FilmMaster a : listfilm){
+            String name = a.getName().toLowerCase();
+            if(name.contains(newText)){
+                newlist.add(a);
+
+
+
+            }
+            customList.setFilter(newlist);
+
+
+        }
+
+        return true;
     }
 
     class docJSON extends AsyncTask<String, Integer, String> {
@@ -155,8 +185,11 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        MenuItem itemSearch = menu.findItem(R.id.menu_seach);
+        searchView = (SearchView) MenuItemCompat.getActionView(itemSearch);
+        //set OnQueryTextListener cho search view để thực hiện search theo text
+        searchView.setOnQueryTextListener(this);
         return true;
     }
 

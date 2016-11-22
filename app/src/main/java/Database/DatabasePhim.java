@@ -18,7 +18,7 @@ super(context,"Phan loai phim ", null, 1);
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        Querydata("CREATE TABLE PhimBo(_ID INTEGER PRIMARY KEY ,name NVARCHAR NOT NULL,type NVARCHAR NOT NULL ,thumb NVARCHAR NOT NULL,year NVARCHAR NOT NULL,decs NVARCHAR NOT NULL,tap INTEGER NOT NULL,link NVARCHAR NOT NULL,)");
+        Querydata("CREATE TABLE IF NOT EXISTS [Phimbo] ([ID] INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT,[type] NVARCHAR(30)  NOT NULL,[name] NVARCHAR(100)  NOT NULL,[thumb] VARCHAR(200)  NOT NULL,[year] VARCHAR(12)  NOT NULL,[decs] VARCHAR(200)  NOT NULL,[tap] INTEGER  NOT NULL,[link] VARCHAR(200)  NOT NULL,[linkphu] VARCHAR(200)  NOT NULL)");
 
     }
     public Cursor GetAll(String sql){

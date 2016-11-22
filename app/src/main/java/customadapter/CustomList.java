@@ -22,7 +22,7 @@ import controller.FilmMaster;
 public class CustomList extends BaseAdapter {
     Context context;
     int resource;
-    ArrayList<FilmMaster> list = new ArrayList<>();
+    ArrayList<FilmMaster> list ;
 
     public CustomList(Context context, int resource, ArrayList<FilmMaster> list) {
         this.context = context;
@@ -57,4 +57,14 @@ public class CustomList extends BaseAdapter {
         Picasso.with(context).load(list.get(position).getThumb()).resize(340, 360).centerCrop().into(img);
         return convertView;
     }
+    public void setFilter(ArrayList<FilmMaster> newList){
+        list = new ArrayList<>();
+        list.addAll(newList);
+        notifyDataSetChanged();
+
+
+
+    }
+
+
 }
