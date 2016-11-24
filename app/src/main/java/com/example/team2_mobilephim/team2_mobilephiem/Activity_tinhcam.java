@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import controller.FilmMaster;
 import customadapter.CustomList;
 
-public class Activity_Tinhcam extends android.support.v4.app.Fragment {
+public class Activity_TinhCam extends android.support.v4.app.Fragment {
     ArrayList<FilmMaster> listfilm = new ArrayList<>();
     private SearchView searchView;
     GridView gridView ;
@@ -32,7 +32,7 @@ public class Activity_Tinhcam extends android.support.v4.app.Fragment {
         View view= inflater.inflate(R.layout.activity_tinhcam,container,false);
 
         gridView=(GridView)view.findViewById(R.id.gridView_tinhcam);
-        new Activity_Tinhcam.DogetData().execute("http://hoangthong.website/app/phimtinhcam.php");
+        new Activity_TinhCam.DogetData().execute("http://hoangthong.website/app/");
 
         return view;
 
@@ -116,7 +116,7 @@ public class Activity_Tinhcam extends android.support.v4.app.Fragment {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     //Toast.makeText(getApplicationContext(), "" + listfilm.get(position).getLink(), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getContext(), Activity_Tinhcam.class);
+                    Intent intent = new Intent(getContext(), Activity_Content.class);
                     intent.putExtra("urls", listfilm.get(position).getLink());
                     intent.putExtra("name",listfilm.get(position).getName());
 

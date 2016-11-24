@@ -214,7 +214,7 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.phimbo:
                 FragmentTransaction transaction1 = fragmentManager.beginTransaction();
-                Activity_Phimbo phimhot1 = new Activity_Phimbo();
+                Activity_PhimBo phimhot1 = new Activity_PhimBo();
 
                 transaction1.replace(R.id.content_main, phimhot1);
                 drawer.closeDrawer(GravityCompat.START);
@@ -232,7 +232,7 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.tinhcam:
                 FragmentTransaction transaction4 = fragmentManager.beginTransaction();
-                Activity_Tinhcam phimtinhcam = new Activity_Tinhcam();
+                Activity_TinhCam phimtinhcam = new Activity_TinhCam();
 
                 transaction4.replace(R.id.content_main, phimtinhcam);
                 drawer.closeDrawer(GravityCompat.START);

@@ -36,11 +36,11 @@ public class Activity_PhimLe  extends  android.support.v4.app.Fragment{
         View view= inflater.inflate(R.layout.activity_phimle,container,false);
 
         gridView=(GridView)view.findViewById(R.id.gridView_phimle);
-        new Activity_PhimLe.DogetData().execute("http://hoangthong.website/app/activity_phimle.php");
+        new Activity_PhimLe.DogetData().execute("http://hoangthong.website/app/");
 
         return view;
 
-}
+    }
     class DogetData extends AsyncTask<String,Integer,ArrayList<FilmMaster>> {
         String urllink;
         String result;
@@ -100,9 +100,6 @@ public class Activity_PhimLe  extends  android.support.v4.app.Fragment{
 
                 }
 
-
-
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -120,7 +117,7 @@ public class Activity_PhimLe  extends  android.support.v4.app.Fragment{
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     //Toast.makeText(getApplicationContext(), "" + listfilm.get(position).getLink(), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getContext(), Activity_PhimLe.class);
+                    Intent intent = new Intent(getContext(), Activity_Content.class);
                     intent.putExtra("urls", listfilm.get(position).getLink());
                     intent.putExtra("name",listfilm.get(position).getName());
 
@@ -131,8 +128,6 @@ public class Activity_PhimLe  extends  android.support.v4.app.Fragment{
                     startActivity(intent);
                 }
             });
-
-
 
         }
 

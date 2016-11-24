@@ -27,7 +27,7 @@ import customadapter.CustomList;
  * Created by tuandeptrai on 24/11/2016.
  */
 
-public class Activity_Phimbo extends android.support.v4.app.Fragment {
+public class Activity_PhimBo extends android.support.v4.app.Fragment {
     ArrayList<FilmMaster> listfilm = new ArrayList<>();
     private SearchView searchView;
     GridView gridView;
@@ -39,7 +39,7 @@ public class Activity_Phimbo extends android.support.v4.app.Fragment {
         View view = inflater.inflate(R.layout.activity_phimbo, container, false);
 
         gridView = (GridView) view.findViewById(R.id.gridView_phimbo);
-        new Activity_Phimbo.DogetData().execute("http://hoangthong.website/app/");
+        new Activity_PhimBo.DogetData().execute("http://hoangthong.website/app/");
         return view;
     }
 
@@ -112,7 +112,7 @@ public class Activity_Phimbo extends android.support.v4.app.Fragment {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     //Toast.makeText(getApplicationContext(), "" + listfilm.get(position).getLink(), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getContext(), Activity_Tapphim.class);
+                    Intent intent = new Intent(getContext(), Activity_TapPhim.class);
                     intent.putExtra("urls", listfilm.get(position).getLink());
                     intent.putExtra("name", listfilm.get(position).getName());
                     intent.putExtra("type", listfilm.get(position).getType());

@@ -32,7 +32,7 @@ public class Activity_HoatHinh extends android.support.v4.app.Fragment {
         View view= inflater.inflate(R.layout.activity_hoat_hinh,container,false);
 
         gridView=(GridView)view.findViewById(R.id.gridView_hoathinh);
-        new Activity_HoatHinh.DogetData().execute("http://hoangthong.website/app/phimhoathinh.php");
+        new Activity_HoatHinh.DogetData().execute("http://hoangthong.website/app/");
 
         return view;
 
@@ -77,7 +77,6 @@ public class Activity_HoatHinh extends android.support.v4.app.Fragment {
                     String name = jsonObject.getString("name");
                     String link = jsonObject.getString("thumb");
                     String type = jsonObject.getString("type");
-
                     String year = jsonObject.getString("year");
                     String decs = jsonObject.getString("decs");
                     if(type.equals("Phim Hoạt Hình")){
@@ -116,7 +115,7 @@ public class Activity_HoatHinh extends android.support.v4.app.Fragment {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     //Toast.makeText(getApplicationContext(), "" + listfilm.get(position).getLink(), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getContext(), Activity_HoatHinh.class);
+                    Intent intent = new Intent(getContext(), Activity_Content.class);
                     intent.putExtra("urls", listfilm.get(position).getLink());
                     intent.putExtra("name",listfilm.get(position).getName());
 

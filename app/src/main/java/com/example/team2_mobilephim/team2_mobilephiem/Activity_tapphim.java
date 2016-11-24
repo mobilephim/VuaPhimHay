@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import controller.TapPhim;
 import customadapter.CustomTapPhim;
 
-public class Activity_Tapphim extends AppCompatActivity {
+public class Activity_TapPhim extends AppCompatActivity {
     ArrayList<TapPhim> listfilm = new ArrayList<>();
     ArrayList<String> mangtapphim = new ArrayList<>();
     ListView lv;
@@ -36,7 +36,7 @@ public class Activity_Tapphim extends AppCompatActivity {
             dieukien = bd.getString("name");
         }
         lv = (ListView) findViewById(R.id.lv_tapphim);
-        new Activity_Tapphim.DogetData().execute("http://hoangthong.website/app/filmep.php");
+        new Activity_TapPhim.DogetData().execute("http://hoangthong.website/app/filmep.php");
 
 
     }
@@ -50,7 +50,7 @@ public class Activity_Tapphim extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pbloading = new ProgressDialog(Activity_Tapphim.this);
+            pbloading = new ProgressDialog(Activity_TapPhim.this);
             pbloading.setMessage("Đang tải phim chờ xíu nhé..");
             pbloading.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             pbloading.setCancelable(true);
@@ -101,7 +101,7 @@ public class Activity_Tapphim extends AppCompatActivity {
             super.onPostExecute(values);
             pbloading.dismiss();
 
-            tapPhim = new CustomTapPhim(Activity_Tapphim.this, R.layout.activity_custom_tapphim, listfilm);
+            tapPhim = new CustomTapPhim(Activity_TapPhim.this, R.layout.activity_custom_tapphim, listfilm);
             lv.setAdapter(tapPhim);
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override

@@ -32,7 +32,7 @@ public class Activity_HanhDong extends android.support.v4.app.Fragment {
         View view= inflater.inflate(R.layout.activity_hanh_dong,container,false);
 
         gridView=(GridView)view.findViewById(R.id.gridView_hanhdong);
-        new Activity_HanhDong.DogetData().execute("http://hoangthong.website/app/phimhanhdong.php");
+        new Activity_HanhDong.DogetData().execute("http://hoangthong.website/app/");
 
         return view;
 
@@ -116,7 +116,7 @@ public class Activity_HanhDong extends android.support.v4.app.Fragment {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     //Toast.makeText(getApplicationContext(), "" + listfilm.get(position).getLink(), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getContext(), Activity_HanhDong.class);
+                    Intent intent = new Intent(getContext(), Activity_Content.class);
                     intent.putExtra("urls", listfilm.get(position).getLink());
                     intent.putExtra("name",listfilm.get(position).getName());
 

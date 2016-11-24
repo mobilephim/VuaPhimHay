@@ -26,12 +26,27 @@
             android:name=".Activity_Content"
             android:configChanges="orientation|screenSize"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".Activity_Tapphim" />
-        <activity android:name=".Activity_HanhDong" />
-        <activity android:name=".Activity_Tinhcam" />
-        <activity android:name=".Activity_HoatHinh" />
-        <activity android:name=".Activity_ChieuRap" />
-        <activity android:name=".Activity_KiemHiep"/>
+        <activity
+            android:name=".Activity_Tapphim"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".Activity_HanhDong"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".Activity_Tinhcam"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".Activity_HoatHinh"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".Activity_ChieuRap"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".Activity_KiemHiep"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".Activity_PhimLe"
+            android:configChanges="orientation|screenSize"></activity>
     </application>
 
 </manifest>

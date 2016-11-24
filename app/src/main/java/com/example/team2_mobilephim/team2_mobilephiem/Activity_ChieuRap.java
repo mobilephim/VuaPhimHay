@@ -33,7 +33,7 @@ public class Activity_ChieuRap extends android.support.v4.app.Fragment{
         View view= inflater.inflate(R.layout.activity_chieu_rap,container,false);
 
         gridView=(GridView)view.findViewById(R.id.gridView_chieurap);
-        new Activity_ChieuRap.DogetData().execute("http://hoangthong.website/app/chieurap.php");
+        new Activity_ChieuRap.DogetData().execute("http://hoangthong.website/app/");
 
         return view;
 
@@ -117,7 +117,7 @@ public class Activity_ChieuRap extends android.support.v4.app.Fragment{
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     //Toast.makeText(getApplicationContext(), "" + listfilm.get(position).getLink(), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getContext(), Activity_ChieuRap.class);
+                    Intent intent = new Intent(getContext(), Activity_Content.class);
                     intent.putExtra("urls", listfilm.get(position).getLink());
                     intent.putExtra("name",listfilm.get(position).getName());
 
