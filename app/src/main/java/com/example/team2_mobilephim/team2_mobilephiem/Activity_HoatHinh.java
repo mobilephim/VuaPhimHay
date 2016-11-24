@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
@@ -30,10 +29,10 @@ public class Activity_HoatHinh extends android.support.v4.app.Fragment {
     GridView gridView ;
     CustomList customList;
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view= inflater.inflate(R.layout.activity__hoat_hinh,container,false);
+        View view= inflater.inflate(R.layout.activity_hoat_hinh,container,false);
 
         gridView=(GridView)view.findViewById(R.id.gridView_hoathinh);
-        new Activity_HoatHinh.DogetData().execute("http://hoangthong.website/app/hoathinh.php");
+        new Activity_HoatHinh.DogetData().execute("http://hoangthong.website/app/phimhoathinh.php");
 
         return view;
 
@@ -48,7 +47,7 @@ public class Activity_HoatHinh extends android.support.v4.app.Fragment {
         protected void onPreExecute() {
             super.onPreExecute();
             pbloading = new ProgressDialog(getContext());
-            pbloading.setMessage("Loading to Phim");
+            pbloading.setMessage("Đang tải phim chờ xíu nhé..");
             pbloading.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             pbloading.setCancelable(true);
             pbloading.setCanceledOnTouchOutside(false);

@@ -3,8 +3,8 @@ package com.example.team2_mobilephim.team2_mobilephiem;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.annotation.Nullable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,21 +23,24 @@ import java.util.ArrayList;
 import controller.FilmMaster;
 import customadapter.CustomList;
 
-public class Activity_ChieuRap extends android.support.v4.app.Fragment{
+/**
+ * Created by Admin on 11/24/2016.
+ */
 
+public class Activity_PhimLe  extends  android.support.v4.app.Fragment{
     ArrayList<FilmMaster> listfilm = new ArrayList<>();
     private SearchView searchView;
     GridView gridView ;
     CustomList customList;
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view= inflater.inflate(R.layout.activity_chieu_rap,container,false);
+        View view= inflater.inflate(R.layout.activity_phimle,container,false);
 
-        gridView=(GridView)view.findViewById(R.id.gridView_chieurap);
-        new Activity_ChieuRap.DogetData().execute("http://hoangthong.website/app/chieurap.php");
+        gridView=(GridView)view.findViewById(R.id.gridView_phimle);
+        new Activity_PhimLe.DogetData().execute("http://hoangthong.website/app/activity_phimle.php");
 
         return view;
 
-    }
+}
     class DogetData extends AsyncTask<String,Integer,ArrayList<FilmMaster>> {
         String urllink;
         String result;
@@ -81,7 +84,7 @@ public class Activity_ChieuRap extends android.support.v4.app.Fragment{
 
                     String year = jsonObject.getString("year");
                     String decs = jsonObject.getString("decs");
-                    if(type.equals("Phim Chiếu Rạp")){
+                    if(type.equals("Phim Lẻ")){
 
                         FilmMaster phimhot = new FilmMaster();
                         phimhot.setName(name);
@@ -117,7 +120,7 @@ public class Activity_ChieuRap extends android.support.v4.app.Fragment{
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     //Toast.makeText(getApplicationContext(), "" + listfilm.get(position).getLink(), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getContext(), Activity_ChieuRap.class);
+                    Intent intent = new Intent(getContext(), Activity_PhimLe.class);
                     intent.putExtra("urls", listfilm.get(position).getLink());
                     intent.putExtra("name",listfilm.get(position).getName());
 

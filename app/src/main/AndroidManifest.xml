@@ -26,12 +26,12 @@
             android:name=".Activity_Content"
             android:configChanges="orientation|screenSize"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".Activity_tapphim" />
+        <activity android:name=".Activity_Tapphim" />
         <activity android:name=".Activity_HanhDong" />
-        <activity android:name=".Activity_tinhcam" />
+        <activity android:name=".Activity_Tinhcam" />
         <activity android:name=".Activity_HoatHinh" />
         <activity android:name=".Activity_ChieuRap" />
-        <activity android:name=".Activity_KiemHiep"></activity>
+        <activity android:name=".Activity_KiemHiep"/>
     </application>
 
 </manifest>

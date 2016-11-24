@@ -232,7 +232,7 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.tinhcam:
                 FragmentTransaction transaction4 = fragmentManager.beginTransaction();
-                Activity_tinhcam phimtinhcam = new Activity_tinhcam();
+                Activity_Tinhcam phimtinhcam = new Activity_Tinhcam();
 
                 transaction4.replace(R.id.content_main, phimtinhcam);
                 drawer.closeDrawer(GravityCompat.START);

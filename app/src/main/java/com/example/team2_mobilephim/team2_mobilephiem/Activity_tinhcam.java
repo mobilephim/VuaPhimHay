@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
@@ -24,7 +23,7 @@ import java.util.ArrayList;
 import controller.FilmMaster;
 import customadapter.CustomList;
 
-public class Activity_tinhcam extends android.support.v4.app.Fragment {
+public class Activity_Tinhcam extends android.support.v4.app.Fragment {
     ArrayList<FilmMaster> listfilm = new ArrayList<>();
     private SearchView searchView;
     GridView gridView ;
@@ -33,7 +32,7 @@ public class Activity_tinhcam extends android.support.v4.app.Fragment {
         View view= inflater.inflate(R.layout.activity_tinhcam,container,false);
 
         gridView=(GridView)view.findViewById(R.id.gridView_tinhcam);
-        new Activity_tinhcam.DogetData().execute("http://hoangthong.website/app/tinhcam.php");
+        new Activity_Tinhcam.DogetData().execute("http://hoangthong.website/app/phimtinhcam.php");
 
         return view;
 
@@ -48,7 +47,7 @@ public class Activity_tinhcam extends android.support.v4.app.Fragment {
         protected void onPreExecute() {
             super.onPreExecute();
             pbloading = new ProgressDialog(getContext());
-            pbloading.setMessage("Loading to Phim");
+            pbloading.setMessage("Đang tải phim chờ xíu nhé..");
             pbloading.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             pbloading.setCancelable(true);
             pbloading.setCanceledOnTouchOutside(false);
@@ -117,7 +116,7 @@ public class Activity_tinhcam extends android.support.v4.app.Fragment {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     //Toast.makeText(getApplicationContext(), "" + listfilm.get(position).getLink(), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getContext(), Activity_tinhcam.class);
+                    Intent intent = new Intent(getContext(), Activity_Tinhcam.class);
                     intent.putExtra("urls", listfilm.get(position).getLink());
                     intent.putExtra("name",listfilm.get(position).getName());
 
