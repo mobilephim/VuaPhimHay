@@ -27,27 +27,23 @@ import customadapter.CustomList;
  * Created by tuandeptrai on 24/11/2016.
  */
 
-public class Activity_Phimbo extends android.support.v4.app.Fragment  {
-    ArrayList<FilmMaster>listfilm = new ArrayList<>();
+public class Activity_Phimbo extends android.support.v4.app.Fragment {
+    ArrayList<FilmMaster> listfilm = new ArrayList<>();
     private SearchView searchView;
-    GridView gridView ;
+    GridView gridView;
     CustomList customList;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view= inflater.inflate(R.layout.activyti_phimbo,container,false);
+        View view = inflater.inflate(R.layout.activity_phimbo, container, false);
 
-        gridView=(GridView)view.findViewById(R.id.gridView_phimbo);
+        gridView = (GridView) view.findViewById(R.id.gridView_phimbo);
         new Activity_Phimbo.DogetData().execute("http://hoangthong.website/app/");
-
         return view;
     }
 
-
-
-
-
-    class DogetData extends AsyncTask<String,Integer,ArrayList<FilmMaster>> {
+    class DogetData extends AsyncTask<String, Integer, ArrayList<FilmMaster>> {
         String urllink;
         String result;
         ProgressDialog pbloading;
@@ -57,7 +53,7 @@ public class Activity_Phimbo extends android.support.v4.app.Fragment  {
         protected void onPreExecute() {
             super.onPreExecute();
             pbloading = new ProgressDialog(getContext());
-            pbloading.setMessage("Loading to Phim");
+            pbloading.setMessage("Đang tải phim chờ xíu nhé..");
             pbloading.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             pbloading.setCancelable(true);
             pbloading.setCanceledOnTouchOutside(false);
@@ -71,26 +67,24 @@ public class Activity_Phimbo extends android.support.v4.app.Fragment  {
                 URL url = new URL(urllink);
                 URLConnection conn = url.openConnection();
                 InputStream is = conn.getInputStream();
-                result="";
+                result = "";
                 int byteCharacter;
-                while((byteCharacter = is.read())!= -1){
+                while ((byteCharacter = is.read()) != -1) {
                     result += (char) byteCharacter;
-
-
                 }
 
                 JSONArray jsonArray = new JSONArray(result);
-                String chuoi="";
+                String chuoi = "";
                 int length = jsonArray.length();
-                for(int i = 0 ; i< jsonArray.length(); i++){
-                    JSONObject jsonObject= jsonArray.getJSONObject(i);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
                     String name = jsonObject.getString("name");
                     String link = jsonObject.getString("thumb");
                     String type = jsonObject.getString("type");
 
                     String year = jsonObject.getString("year");
                     String decs = jsonObject.getString("decs");
-                    if(type.equals("Phim Bộ")){
+                    if (type.equals("Phim Bộ")) {
 
                         FilmMaster phimhot = new FilmMaster();
                         phimhot.setName(name);
@@ -98,17 +92,9 @@ public class Activity_Phimbo extends android.support.v4.app.Fragment  {
                         phimhot.setType(type);
                         phimhot.setYear(year);
                         phimhot.setDecs(decs);
-
                         listfilm.add(phimhot);
-
-
                     }
-
                 }
-
-
-
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -120,28 +106,25 @@ public class Activity_Phimbo extends android.support.v4.app.Fragment  {
         protected void onPostExecute(ArrayList<FilmMaster> values) {
             super.onPostExecute(values);
             pbloading.dismiss();
-             customList = new CustomList(getContext(),R.layout.activity_customfilm,listfilm);
-gridView.setAdapter(customList);
+            customList = new CustomList(getContext(), R.layout.activity_customfilm, listfilm);
+            gridView.setAdapter(customList);
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     //Toast.makeText(getApplicationContext(), "" + listfilm.get(position).getLink(), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getContext(), Activity_tapphim.class);
+                    Intent intent = new Intent(getContext(), Activity_Tapphim.class);
                     intent.putExtra("urls", listfilm.get(position).getLink());
-                    intent.putExtra("name",listfilm.get(position).getName());
-
-                    intent.putExtra("type",listfilm.get(position).getType());
-                    intent.putExtra("year",listfilm.get(position).getYear());
-                    intent.putExtra("decs",listfilm.get(position).getDecs());
+                    intent.putExtra("name", listfilm.get(position).getName());
+                    intent.putExtra("type", listfilm.get(position).getType());
+                    intent.putExtra("year", listfilm.get(position).getYear());
+                    intent.putExtra("decs", listfilm.get(position).getDecs());
 
                     startActivity(intent);
                 }
             });
 
 
-
         }
-
 
 
     }

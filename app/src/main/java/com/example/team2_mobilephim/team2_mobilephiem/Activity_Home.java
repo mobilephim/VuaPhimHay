@@ -24,10 +24,10 @@ import controller.FilmMaster;
 import customadapter.CustomList;
 
 /**
- * Created by tuandeptrai on 12/11/2016.
+ * Created by Hoàng Thông on 23/11/2016.
  */
 
-public class Phim_hot extends android.support.v4.app.Fragment {
+public class Activity_Home extends android.support.v4.app.Fragment {
 
     ArrayList<FilmMaster> listfilm = new ArrayList<>();
     GridView gridView;
@@ -35,14 +35,10 @@ public class Phim_hot extends android.support.v4.app.Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.layout_phimhot, container, false);
+        View view = inflater.inflate(R.layout.activity_home, container, false);
         gridView = (GridView) view.findViewById(R.id.gridView);
         new DogetData().execute("http://hoangthong.website/app/");
-
-
         return view;
-
-
     }
 
 
@@ -51,12 +47,11 @@ public class Phim_hot extends android.support.v4.app.Fragment {
         String result;
         ProgressDialog pbloading;
 
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             pbloading = new ProgressDialog(getContext());
-            pbloading.setMessage("Loading to Phim");
+            pbloading.setMessage("Đang tải phim chờ xíu nhé..");
             pbloading.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             pbloading.setCancelable(true);
             pbloading.setCanceledOnTouchOutside(false);
@@ -74,8 +69,6 @@ public class Phim_hot extends android.support.v4.app.Fragment {
                 int byteCharacter;
                 while ((byteCharacter = is.read()) != -1) {
                     result += (char) byteCharacter;
-
-
                 }
                 Thread.sleep(700);
                 JSONArray jsonArray = new JSONArray(result);
@@ -90,7 +83,6 @@ public class Phim_hot extends android.support.v4.app.Fragment {
                     String year = jsonObject.getString("year");
                     String decs = jsonObject.getString("decs");
 
-
                     FilmMaster phimhot = new FilmMaster();
                     phimhot.setName(name);
                     phimhot.setThumb(thumb);
@@ -100,11 +92,7 @@ public class Phim_hot extends android.support.v4.app.Fragment {
                     phimhot.setDecs(decs);
 
                     listfilm.add(phimhot);
-
-
                 }
-
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -115,11 +103,7 @@ public class Phim_hot extends android.support.v4.app.Fragment {
         @Override
         protected void onPostExecute(ArrayList<FilmMaster> values) {
             super.onPostExecute(values);
-
-
             pbloading.dismiss();
-
-
             CustomList customList = new CustomList(getContext(), R.layout.activity_customfilm, listfilm);
             gridView.setAdapter(customList);
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -137,15 +121,7 @@ public class Phim_hot extends android.support.v4.app.Fragment {
                     startActivity(intent);
                 }
             });
-
-
         }
-
-
     }
-
-
-    // tao dialog
-
 
 }

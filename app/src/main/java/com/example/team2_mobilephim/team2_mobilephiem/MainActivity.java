@@ -58,19 +58,15 @@ public class MainActivity extends AppCompatActivity
         // thuc thi kiem tra ket noi internet
         checkInternetConnection();
 
-
-
-
         view = (GridView) findViewById(R.id.grid_view);
         // thuc thi clas docJSON
 
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        Phim_hot phimhot = new Phim_hot();
+        Activity_Home phimhot = new Activity_Home();
 
         transaction.replace(R.id.content_main, phimhot);
         drawer.closeDrawer(GravityCompat.START);
         transaction.commit();
-
     }
 
     @Override
@@ -81,14 +77,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onQueryTextChange(String newText) {
         newText = newText.toLowerCase();
-        ArrayList<FilmMaster>  newlist = new ArrayList<>();
-        for(FilmMaster a : listfilm){
+        ArrayList<FilmMaster> newlist = new ArrayList<>();
+        for (FilmMaster a : listfilm) {
             String name = a.getName().toLowerCase();
-            if(name.contains(newText)){
+            if (name.contains(newText)) {
                 newlist.add(a);
-
-
-
             }
             customList.setFilter(newlist);
 
@@ -205,9 +198,9 @@ public class MainActivity extends AppCompatActivity
         switch (i) {
             case R.id.phimhot:
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
-                Phim_hot phimhot = new Phim_hot();
+                Activity_Home trangchu = new Activity_Home();
 
-                transaction.replace(R.id.content_main, phimhot);
+                transaction.replace(R.id.content_main, trangchu);
                 drawer.closeDrawer(GravityCompat.START);
                 transaction.commit();
                 ;

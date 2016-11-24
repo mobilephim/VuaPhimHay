@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -19,12 +18,14 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 
 import controller.TapPhim;
+import customadapter.CustomTapPhim;
 
-public class Activity_tapphim extends AppCompatActivity {
+public class Activity_Tapphim extends AppCompatActivity {
     ArrayList<TapPhim> listfilm = new ArrayList<>();
     ArrayList<String> mangtapphim = new ArrayList<>();
     ListView lv;
     String dieukien;
+    CustomTapPhim tapPhim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +34,9 @@ public class Activity_tapphim extends AppCompatActivity {
         Bundle bd = getIntent().getExtras();
         if (bd != null) {
             dieukien = bd.getString("name");
-
-
         }
         lv = (ListView) findViewById(R.id.lv_tapphim);
-        new Activity_tapphim.DogetData().execute("http://hoangthong.website/app/filmep.php");
+        new Activity_Tapphim.DogetData().execute("http://hoangthong.website/app/filmep.php");
 
 
     }
@@ -51,8 +50,8 @@ public class Activity_tapphim extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pbloading = new ProgressDialog(Activity_tapphim.this);
-            pbloading.setMessage("Loading to Phim");
+            pbloading = new ProgressDialog(Activity_Tapphim.this);
+            pbloading.setMessage("Đang tải phim chờ xíu nhé..");
             pbloading.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             pbloading.setCancelable(true);
             pbloading.setCanceledOnTouchOutside(false);
@@ -70,8 +69,6 @@ public class Activity_tapphim extends AppCompatActivity {
                 int byteCharacter;
                 while ((byteCharacter = is.read()) != -1) {
                     result += (char) byteCharacter;
-
-
                 }
 
                 JSONArray jsonArray = new JSONArray(result);
@@ -86,19 +83,16 @@ public class Activity_tapphim extends AppCompatActivity {
                     if (name.equals(dieukien)) {
                         TapPhim tapPhim = new TapPhim();
                         tapPhim.setName(name);
-                        tapPhim.setTentap(tentap);
+                        tapPhim.setTentap(name+" - "+tentap);
                         tapPhim.setLink(link);
 
                         listfilm.add(tapPhim);
                         mangtapphim.add(tentap);
                     }
                 }
-
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
             return listfilm;
         }
 
@@ -107,20 +101,15 @@ public class Activity_tapphim extends AppCompatActivity {
             super.onPostExecute(values);
             pbloading.dismiss();
 
-
-            ArrayAdapter<String> adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, mangtapphim);
-            lv.setAdapter(adapter);
+            tapPhim = new CustomTapPhim(Activity_Tapphim.this, R.layout.activity_custom_tapphim, listfilm);
+            lv.setAdapter(tapPhim);
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Toast.makeText(getApplicationContext(), listfilm.get(position).getName(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), listfilm.get(position).getTentap(), Toast.LENGTH_SHORT).show();
                 }
             });
-
-
         }
-
-
     }
 
 }

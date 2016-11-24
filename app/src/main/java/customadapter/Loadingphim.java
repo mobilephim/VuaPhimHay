@@ -9,7 +9,7 @@ import android.content.Context;
 
 public class Loadingphim {
     public void LaunchBatDiaLog(Context context){
-        final ProgressDialog ringProgressDialog = ProgressDialog.show(context,"","Loading phim",true);
+        final ProgressDialog ringProgressDialog = ProgressDialog.show(context,"","Đang tải phim chờ xíu nhé..",true);
         ringProgressDialog.setCancelable(true);
         new Thread(new Runnable() {
             @Override
