@@ -204,6 +204,12 @@ public class MainActivity extends AppCompatActivity
                 ;
                 break;
             case R.id.phimle:
+                FragmentTransaction transaction2 = fragmentManager.beginTransaction();
+                Activity_PhimLe phimle = new Activity_PhimLe();
+
+                transaction2.replace(R.id.content_main, phimle);
+                drawer.closeDrawer(GravityCompat.START);
+                transaction2.commit();
                 ;
                 break;
             case R.id.phimbo:
@@ -216,12 +222,47 @@ public class MainActivity extends AppCompatActivity
                 ;
                 break;
             case R.id.phimchieurap:
+                FragmentTransaction transaction6 = fragmentManager.beginTransaction();
+                Activity_ChieuRap chieurap = new Activity_ChieuRap();
+
+                transaction6.replace(R.id.content_main, chieurap);
+                drawer.closeDrawer(GravityCompat.START);
+                transaction6.commit();
                 ;
                 break;
+            case R.id.tinhcam:
+                FragmentTransaction transaction4 = fragmentManager.beginTransaction();
+                Activity_tinhcam phimtinhcam = new Activity_tinhcam();
+
+                transaction4.replace(R.id.content_main, phimtinhcam);
+                drawer.closeDrawer(GravityCompat.START);
+                transaction4.commit();
+                ;
             case R.id.hoathinh:
+                FragmentTransaction transaction5 = fragmentManager.beginTransaction();
+                Activity_HoatHinh phimhoathinh = new Activity_HoatHinh();
+
+                transaction5.replace(R.id.content_main, phimhoathinh);
+                drawer.closeDrawer(GravityCompat.START);
+                transaction5.commit();
+                ;
+                break;
+            case R.id.kiemhiep:
+                FragmentTransaction transaction7 = fragmentManager.beginTransaction();
+                Activity_KiemHiep phimkiemhiep = new Activity_KiemHiep();
+
+                transaction7.replace(R.id.content_main, phimkiemhiep);
+                drawer.closeDrawer(GravityCompat.START);
+                transaction7.commit();
                 ;
                 break;
             case R.id.hanhdong:
+                FragmentTransaction transaction3 = fragmentManager.beginTransaction();
+                Activity_HanhDong phimhanhdong = new Activity_HanhDong();
+
+                transaction3.replace(R.id.content_main, phimhanhdong);
+                drawer.closeDrawer(GravityCompat.START);
+                transaction3.commit();
                 ;
                 break;
         }
