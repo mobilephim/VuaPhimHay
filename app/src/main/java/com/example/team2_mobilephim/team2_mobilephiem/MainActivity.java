@@ -1,11 +1,8 @@
 package com.example.team2_mobilephim.team2_mobilephiem;
 
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -19,14 +16,8 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -34,7 +25,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 
-import Database.DatabasePhim;
 import controller.FilmMaster;
 import customadapter.CustomList;
 
@@ -67,18 +57,19 @@ public class MainActivity extends AppCompatActivity
 
         // thuc thi kiem tra ket noi internet
         checkInternetConnection();
-        DatabasePhim databasePhim = new DatabasePhim(this);
+
 
 
 
         view = (GridView) findViewById(R.id.grid_view);
         // thuc thi clas docJSON
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                new docJSON().execute("http://hoangthong.website/app");
-            }
-        });
+
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        Phim_hot phimhot = new Phim_hot();
+
+        transaction.replace(R.id.content_main, phimhot);
+        drawer.closeDrawer(GravityCompat.START);
+        transaction.commit();
 
     }
 
@@ -107,81 +98,81 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    class docJSON extends AsyncTask<String, Integer, String> {
-        ProgressDialog pbloading;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            pbloading = new ProgressDialog(MainActivity.this);
-            pbloading.setMessage("Đang tải phim...");
-            pbloading.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            pbloading.setCancelable(true);
-            pbloading.setCanceledOnTouchOutside(false);
-            pbloading.show();
-
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-            return docNoiDung_Tu_URL(params[0]);
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            //Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();
-            try {
-                pbloading.dismiss();
-                JSONArray mangjson = new JSONArray(s);
-                for (int i = 0; i < mangjson.length(); i++) {
-                    JSONObject obj = mangjson.getJSONObject(i);
-                    listfilm.add(new FilmMaster(
-                            obj.getString("name"),
-                            obj.getString("thumb"),
-                            obj.getString("url"),
-                            obj.getString("type"),
-                            obj.getString("year"),
-                            obj.getString("decs")
-                    ));
-                }
-                //Toast.makeText(getApplicationContext(),""+listfilm.size(),Toast.LENGTH_SHORT).show();
-                customList = new CustomList(
-                        getApplicationContext(),
-                        R.layout.activity_customfilm,
-                        listfilm
-                );
-                customList.notifyDataSetChanged();
-                view.setAdapter(customList);
-                view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        //Toast.makeText(getApplicationContext(), "" + listfilm.get(position).getLink(), Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(MainActivity.this, Activity_Content.class);
-                        intent.putExtra("urls", listfilm.get(position).getLink());
-                        intent.putExtra("name",listfilm.get(position).getName());
-                        intent.putExtra("type",listfilm.get(position).getType());
-                        intent.putExtra("year",listfilm.get(position).getYear());
-                        intent.putExtra("decs",listfilm.get(position).getDecs());
-                        pbloading.dismiss();
-                        startActivity(intent);
-                    }
-                });
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
+//    class docJSON extends AsyncTask<String, Integer, String> {
+//        ProgressDialog pbloading;
+//
+//        @Override
+//        protected void onPreExecute() {
+//            super.onPreExecute();
+//            pbloading = new ProgressDialog(MainActivity.this);
+//            pbloading.setMessage("Đang tải phim...");
+//            pbloading.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//            pbloading.setCancelable(true);
+//            pbloading.setCanceledOnTouchOutside(false);
+//            pbloading.show();
+//
+//        }
+//
+//        @Override
+//        protected String doInBackground(String... params) {
+//            return docNoiDung_Tu_URL(params[0]);
+//        }
+//
+//        @Override
+//        protected void onPostExecute(String s) {
+//            //Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();
+//            try {
+//                pbloading.dismiss();
+//                JSONArray mangjson = new JSONArray(s);
+//                for (int i = 0; i < mangjson.length(); i++) {
+//                    JSONObject obj = mangjson.getJSONObject(i);
+//                    listfilm.add(new FilmMaster(
+//                            obj.getString("name"),
+//                            obj.getString("thumb"),
+//                            obj.getString("url"),
+//                            obj.getString("type"),
+//                            obj.getString("year"),
+//                            obj.getString("decs")
+//                    ));
+//                }
+//                //Toast.makeText(getApplicationContext(),""+listfilm.size(),Toast.LENGTH_SHORT).show();
+//                customList = new CustomList(
+//                        getApplicationContext(),
+//                        R.layout.activity_customfilm,
+//                        listfilm
+//                );
+//                customList.notifyDataSetChanged();
+//                view.setAdapter(customList);
+//                view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                        //Toast.makeText(getApplicationContext(), "" + listfilm.get(position).getLink(), Toast.LENGTH_SHORT).show();
+//                        Intent intent = new Intent(MainActivity.this, Activity_Content.class);
+//                        intent.putExtra("urls", listfilm.get(position).getLink());
+//                        intent.putExtra("name",listfilm.get(position).getName());
+//                        intent.putExtra("type",listfilm.get(position).getType());
+//                        intent.putExtra("year",listfilm.get(position).getYear());
+//                        intent.putExtra("decs",listfilm.get(position).getDecs());
+//                        pbloading.dismiss();
+//                        startActivity(intent);
+//                    }
+//                });
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
+//
+//
+//    @Override
+//    public void onBackPressed() {
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        if (drawer.isDrawerOpen(GravityCompat.START)) {
+//            drawer.closeDrawer(GravityCompat.START);
+//        } else {
+//            super.onBackPressed();
+//        }
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -225,6 +216,12 @@ public class MainActivity extends AppCompatActivity
                 ;
                 break;
             case R.id.phimbo:
+                FragmentTransaction transaction1 = fragmentManager.beginTransaction();
+                Activity_Phimbo phimhot1 = new Activity_Phimbo();
+
+                transaction1.replace(R.id.content_main, phimhot1);
+                drawer.closeDrawer(GravityCompat.START);
+                transaction1.commit();
                 ;
                 break;
             case R.id.phimchieurap:

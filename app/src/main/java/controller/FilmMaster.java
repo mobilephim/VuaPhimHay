@@ -7,6 +7,9 @@ package controller;
 public class FilmMaster {
     String name, thumb, link, type, year, decs;
 
+    public FilmMaster() {
+    }
+
     public FilmMaster(String name, String thumb, String link, String type, String year, String decs) {
         this.name = name;
         this.thumb = thumb;

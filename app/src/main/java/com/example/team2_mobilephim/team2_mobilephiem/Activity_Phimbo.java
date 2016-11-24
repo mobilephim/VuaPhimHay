@@ -5,12 +5,12 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -24,29 +24,30 @@ import controller.FilmMaster;
 import customadapter.CustomList;
 
 /**
- * Created by tuandeptrai on 12/11/2016.
+ * Created by tuandeptrai on 24/11/2016.
  */
 
-public class Phim_hot extends android.support.v4.app.Fragment {
-
-    ArrayList<FilmMaster> listfilm = new ArrayList<>();
-    GridView gridView;
-
+public class Activity_Phimbo extends android.support.v4.app.Fragment  {
+    ArrayList<FilmMaster>listfilm = new ArrayList<>();
+    private SearchView searchView;
+    GridView gridView ;
+    CustomList customList;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.layout_phimhot, container, false);
-        gridView = (GridView) view.findViewById(R.id.gridView);
-        new DogetData().execute("http://hoangthong.website/app/");
+        View view= inflater.inflate(R.layout.activyti_phimbo,container,false);
 
+        gridView=(GridView)view.findViewById(R.id.gridView_phimbo);
+        new Activity_Phimbo.DogetData().execute("http://hoangthong.website/app/");
 
         return view;
-
-
     }
 
 
-    class DogetData extends AsyncTask<String, Integer, ArrayList<FilmMaster>> {
+
+
+
+    class DogetData extends AsyncTask<String,Integer,ArrayList<FilmMaster>> {
         String urllink;
         String result;
         ProgressDialog pbloading;
@@ -70,39 +71,42 @@ public class Phim_hot extends android.support.v4.app.Fragment {
                 URL url = new URL(urllink);
                 URLConnection conn = url.openConnection();
                 InputStream is = conn.getInputStream();
-                result = "";
+                result="";
                 int byteCharacter;
-                while ((byteCharacter = is.read()) != -1) {
+                while((byteCharacter = is.read())!= -1){
                     result += (char) byteCharacter;
 
 
                 }
-                Thread.sleep(700);
+
                 JSONArray jsonArray = new JSONArray(result);
-                String chuoi = "";
+                String chuoi="";
                 int length = jsonArray.length();
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                for(int i = 0 ; i< jsonArray.length(); i++){
+                    JSONObject jsonObject= jsonArray.getJSONObject(i);
                     String name = jsonObject.getString("name");
-                    String thumb = jsonObject.getString("thumb");
+                    String link = jsonObject.getString("thumb");
                     String type = jsonObject.getString("type");
-                    String urll = jsonObject.getString("url");
+
                     String year = jsonObject.getString("year");
                     String decs = jsonObject.getString("decs");
+                    if(type.equals("Phim Bộ")){
+
+                        FilmMaster phimhot = new FilmMaster();
+                        phimhot.setName(name);
+                        phimhot.setThumb(link);
+                        phimhot.setType(type);
+                        phimhot.setYear(year);
+                        phimhot.setDecs(decs);
+
+                        listfilm.add(phimhot);
 
 
-                    FilmMaster phimhot = new FilmMaster();
-                    phimhot.setName(name);
-                    phimhot.setThumb(thumb);
-                    phimhot.setLink(urll);
-                    phimhot.setType(type);
-                    phimhot.setYear(year);
-                    phimhot.setDecs(decs);
-
-                    listfilm.add(phimhot);
-
+                    }
 
                 }
+
+
 
 
             } catch (Exception e) {
@@ -115,37 +119,30 @@ public class Phim_hot extends android.support.v4.app.Fragment {
         @Override
         protected void onPostExecute(ArrayList<FilmMaster> values) {
             super.onPostExecute(values);
-
-
             pbloading.dismiss();
-
-
-            CustomList customList = new CustomList(getContext(), R.layout.activity_customfilm, listfilm);
-            gridView.setAdapter(customList);
+             customList = new CustomList(getContext(),R.layout.activity_customfilm,listfilm);
+gridView.setAdapter(customList);
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     //Toast.makeText(getApplicationContext(), "" + listfilm.get(position).getLink(), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getContext(), Activity_Content.class);
+                    Intent intent = new Intent(getContext(), Activity_tapphim.class);
                     intent.putExtra("urls", listfilm.get(position).getLink());
-                    intent.putExtra("name", listfilm.get(position).getName());
-                    intent.putExtra("type", listfilm.get(position).getType());
-                    intent.putExtra("year", listfilm.get(position).getYear());
-                    intent.putExtra("decs", listfilm.get(position).getDecs());
+                    intent.putExtra("name",listfilm.get(position).getName());
 
-                    Toast.makeText(getContext(), listfilm.get(position).getName(), Toast.LENGTH_SHORT).show();
+                    intent.putExtra("type",listfilm.get(position).getType());
+                    intent.putExtra("year",listfilm.get(position).getYear());
+                    intent.putExtra("decs",listfilm.get(position).getDecs());
+
                     startActivity(intent);
                 }
             });
 
 
+
         }
 
 
+
     }
-
-
-    // tao dialog
-
-
 }

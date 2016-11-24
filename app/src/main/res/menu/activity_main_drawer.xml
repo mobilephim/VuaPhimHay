@@ -14,7 +14,7 @@
         <item
             android:id="@+id/phimbo"
             android:icon="@drawable/ic_favorite_border_black_24dp"
-            android:title="Phim Yêu thich" />
+            android:title="Phim Bộ" />
         <item
             android:id="@+id/phimchieurap"
             android:icon="@drawable/ic_video_call_black_24dp"

@@ -26,6 +26,7 @@
             android:name=".Activity_Content"
             android:configChanges="orientation|screenSize"
             android:parentActivityName=".MainActivity" />
+        <activity android:name=".Activity_tapphim"></activity>
     </application>
 
 </manifest>
