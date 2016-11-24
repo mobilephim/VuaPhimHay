@@ -123,5 +123,4 @@ public class Activity_Home extends android.support.v4.app.Fragment {
             });
         }
     }
-
 }

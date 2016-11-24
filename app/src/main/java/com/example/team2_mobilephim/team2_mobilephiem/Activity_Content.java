@@ -61,7 +61,6 @@ public class Activity_Content extends AppCompatActivity  {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         host.setup();
 
         TabHost.TabSpec tab1 = host.newTabSpec("Information");

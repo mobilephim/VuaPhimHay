@@ -20,7 +20,6 @@ public class Loadingphim {
                     e.printStackTrace();
                 }
                 ringProgressDialog.dismiss();
-
             }
         }).start();
 

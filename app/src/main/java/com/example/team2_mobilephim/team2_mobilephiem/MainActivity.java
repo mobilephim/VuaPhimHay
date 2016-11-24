@@ -84,8 +84,6 @@ public class MainActivity extends AppCompatActivity
                 newlist.add(a);
             }
             customList.setFilter(newlist);
-
-
         }
 
         return true;

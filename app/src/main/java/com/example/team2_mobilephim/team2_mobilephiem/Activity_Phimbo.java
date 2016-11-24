@@ -122,10 +122,6 @@ public class Activity_Phimbo extends android.support.v4.app.Fragment {
                     startActivity(intent);
                 }
             });
-
-
         }
-
-
     }
 }
