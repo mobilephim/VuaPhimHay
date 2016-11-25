@@ -265,6 +265,9 @@ public class MainActivity extends AppCompatActivity
                 transaction3.commit();
                 ;
                 break;
+            case R.id.thoat:
+                System.exit(0);
+                break;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

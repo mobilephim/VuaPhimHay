@@ -5,8 +5,12 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -23,7 +27,7 @@ import java.util.ArrayList;
 import controller.FilmMaster;
 import customadapter.CustomList;
 
-public class Activity_ChieuRap extends android.support.v4.app.Fragment{
+public class Activity_ChieuRap extends android.support.v4.app.Fragment implements SearchView.OnQueryTextListener{
 
     ArrayList<FilmMaster> listfilm = new ArrayList<>();
     private SearchView searchView;
@@ -34,10 +38,51 @@ public class Activity_ChieuRap extends android.support.v4.app.Fragment{
 
         gridView=(GridView)view.findViewById(R.id.gridView_chieurap);
         new Activity_ChieuRap.DogetData().execute("http://hoangthong.website/app/");
-
+        setHasOptionsMenu(true);
         return view;
 
     }
+    public void onCreateOptionsMenu (Menu menu, MenuInflater inflater) {
+
+        //inflater.inflate(R.menu.main, menu); // removed to not double the menu items
+        MenuItem item = menu.findItem(R.id.menu_seach);
+        SearchView sv = new SearchView(((MainActivity) getActivity()).getSupportActionBar().getThemedContext());
+        MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW | MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
+        MenuItemCompat.setActionView(item, sv);
+        sv.setOnQueryTextListener(this);
+        sv.setIconifiedByDefault(false);
+
+
+
+        super.onCreateOptionsMenu(menu,inflater);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        newText = newText.toLowerCase();
+        ArrayList<FilmMaster>  newlist = new ArrayList<>();
+        for(FilmMaster a : listfilm){
+            String name = a.getName().toLowerCase();
+            if(name.contains(newText)){
+                newlist.add(a);
+
+
+
+            }
+            customList.setFilter(newlist);
+
+
+        }
+
+        return true;
+    }
+
     class DogetData extends AsyncTask<String,Integer,ArrayList<FilmMaster>> {
         String urllink;
         String result;
