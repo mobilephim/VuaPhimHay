@@ -10,12 +10,33 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true" />
+    <TextView
+        android:id="@+id/type"
+        android:layout_width="115dp"
+        android:layout_height="30dp"
+
+        android:background="#80000000"
+        android:padding="7dp"
+        android:text="phim bo"
+        android:textColor="#f9f3f3"
+        android:textSize="13sp" />
+    <TextView
+        android:id="@+id/type1"
+        android:layout_width="170dp"
+        android:layout_height="30dp"
+        android:paddingTop="5dp"
+        android:textStyle="bold|italic"
+
+       android:paddingLeft="120dp"
+        android:text="New"
+        android:textColor="#EE0000"
+        android:textSize="13sp" />
 
     <TextView
         android:id="@+id/cus_name"
         android:layout_width="170dp"
         android:layout_height="35dp"
-        android:layout_alignParentBottom="true"
+       android:layout_alignParentBottom="true"
         android:background="#80000000"
         android:padding="7dp"
         android:text="TextView"

@@ -117,7 +117,7 @@ public class Activity_Home extends android.support.v4.app.Fragment implements Se
                 JSONArray jsonArray = new JSONArray(result);
                 String chuoi = "";
                 int length = jsonArray.length();
-                for (int i = 0; i < jsonArray.length(); i++) {
+                for (int i = 0; i < 10; i++) {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     String name = jsonObject.getString("name");
                     String thumb = jsonObject.getString("thumb");

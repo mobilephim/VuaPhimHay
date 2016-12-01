@@ -51,8 +51,18 @@ public class CustomList extends BaseAdapter {
         convertView = inflater.inflate(resource, parent, false);
 
         TextView name = (TextView) convertView.findViewById(R.id.cus_name);
-        ImageView img = (ImageView) convertView.findViewById(R.id.cus_imageview);
+        TextView neww = (TextView) convertView.findViewById(R.id.type1);
+        if(list.get(position).getYear().equals("2016")){
+            neww.setText("HOT *");
 
+        }
+        if(list.get(position).getYear().equals("2017")){
+            neww.setText("New ***");
+
+        }
+        TextView type = (TextView) convertView.findViewById(R.id.type);
+        ImageView img = (ImageView) convertView.findViewById(R.id.cus_imageview);
+        type.setText(list.get(position).getType());
         name.setText(list.get(position).getName());
         Picasso.with(context).load(list.get(position).getThumb()).resize(340, 360).centerCrop().into(img);
         return convertView;
