@@ -123,6 +123,7 @@ public class Activity_HoatHinh extends android.support.v4.app.Fragment implement
                     String link = jsonObject.getString("thumb");
                     String type = jsonObject.getString("type");
                     String year = jsonObject.getString("year");
+                    String urll = jsonObject.getString("url");
                     String decs = jsonObject.getString("decs");
                     if(type.equals("Phim Hoạt Hình")){
 
@@ -132,7 +133,7 @@ public class Activity_HoatHinh extends android.support.v4.app.Fragment implement
                         phimhot.setType(type);
                         phimhot.setYear(year);
                         phimhot.setDecs(decs);
-
+phimhot.setLink(urll);
                         listfilm.add(phimhot);
 
 

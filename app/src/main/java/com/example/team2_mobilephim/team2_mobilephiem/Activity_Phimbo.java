@@ -124,7 +124,7 @@ public class Activity_PhimBo extends android.support.v4.app.Fragment implements 
                     String name = jsonObject.getString("name");
                     String link = jsonObject.getString("thumb");
                     String type = jsonObject.getString("type");
-
+                    String urll = jsonObject.getString("url");
                     String year = jsonObject.getString("year");
                     String decs = jsonObject.getString("decs");
                     if (type.equals("Phim Bộ")) {
@@ -135,6 +135,7 @@ public class Activity_PhimBo extends android.support.v4.app.Fragment implements 
                         phimhot.setType(type);
                         phimhot.setYear(year);
                         phimhot.setDecs(decs);
+                        phimhot.setLink(urll);
                         listfilm.add(phimhot);
                     }
                 }
@@ -154,13 +155,14 @@ public class Activity_PhimBo extends android.support.v4.app.Fragment implements 
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    //Toast.makeText(getApplicationContext(), "" + listfilm.get(position).getLink(), Toast.LENGTH_SHORT).show();
+
                     Intent intent = new Intent(getContext(), Activity_TapPhim.class);
-                    intent.putExtra("urls", listfilm.get(position).getLink());
-                    intent.putExtra("name", listfilm.get(position).getName());
-                    intent.putExtra("type", listfilm.get(position).getType());
-                    intent.putExtra("year", listfilm.get(position).getYear());
-                    intent.putExtra("decs", listfilm.get(position).getDecs());
+
+                    intent.putExtra("name",listfilm.get(position).getName());
+
+                    intent.putExtra("type",listfilm.get(position).getType());
+                    intent.putExtra("year",listfilm.get(position).getYear());
+                    intent.putExtra("decs",listfilm.get(position).getDecs());
 
                     startActivity(intent);
                 }

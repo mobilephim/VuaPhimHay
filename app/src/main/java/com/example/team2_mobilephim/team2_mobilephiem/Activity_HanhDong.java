@@ -121,7 +121,7 @@ public class Activity_HanhDong extends android.support.v4.app.Fragment implement
                     String name = jsonObject.getString("name");
                     String link = jsonObject.getString("thumb");
                     String type = jsonObject.getString("type");
-
+                    String urll = jsonObject.getString("url");
                     String year = jsonObject.getString("year");
                     String decs = jsonObject.getString("decs");
                     if(type.equals("Phim Hành Động")){
@@ -132,7 +132,7 @@ public class Activity_HanhDong extends android.support.v4.app.Fragment implement
                         phimhot.setType(type);
                         phimhot.setYear(year);
                         phimhot.setDecs(decs);
-
+phimhot.setLink(urll);
                         listfilm.add(phimhot);
 
 

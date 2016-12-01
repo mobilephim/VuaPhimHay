@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -114,7 +113,7 @@ public class Activity_Home extends android.support.v4.app.Fragment implements Se
                 while ((byteCharacter = is.read()) != -1) {
                     result += (char) byteCharacter;
                 }
-                Thread.sleep(700);
+
                 JSONArray jsonArray = new JSONArray(result);
                 String chuoi = "";
                 int length = jsonArray.length();
@@ -161,7 +160,7 @@ public class Activity_Home extends android.support.v4.app.Fragment implements Se
                     intent.putExtra("year", listfilm.get(position).getYear());
                     intent.putExtra("decs", listfilm.get(position).getDecs());
 
-                    Toast.makeText(getContext(), listfilm.get(position).getName(), Toast.LENGTH_SHORT).show();
+
                     startActivity(intent);
                 }
             });

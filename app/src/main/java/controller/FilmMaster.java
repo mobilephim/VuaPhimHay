@@ -6,7 +6,7 @@ package controller;
 
 public class FilmMaster {
     String name, thumb, link, type, year, decs;
-
+int iD;
     public FilmMaster() {
     }
 
@@ -17,6 +17,14 @@ public class FilmMaster {
         this.type = type;
         this.year = year;
         this.decs = decs;
+    }
+
+    public int getiD() {
+        return iD;
+    }
+
+    public void setiD(int iD) {
+        this.iD = iD;
     }
 
     public String getName() {

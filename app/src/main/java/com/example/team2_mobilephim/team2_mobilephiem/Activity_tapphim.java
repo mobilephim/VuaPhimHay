@@ -1,13 +1,13 @@
 package com.example.team2_mobilephim.team2_mobilephiem;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -26,6 +26,7 @@ public class Activity_TapPhim extends AppCompatActivity {
     ListView lv;
     String dieukien;
     CustomTapPhim tapPhim;
+    String name, type, year, decs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,13 @@ public class Activity_TapPhim extends AppCompatActivity {
         }
         lv = (ListView) findViewById(R.id.lv_tapphim);
         new Activity_TapPhim.DogetData().execute("http://hoangthong.website/app/filmep.php");
+        name = getIntent().getStringExtra("name");
+
+        type = getIntent().getStringExtra("type");
+
+        year = getIntent().getStringExtra("year");
+
+        decs = getIntent().getStringExtra("decs");
 
 
     }
@@ -106,7 +114,18 @@ public class Activity_TapPhim extends AppCompatActivity {
             lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Toast.makeText(getApplicationContext(), listfilm.get(position).getTentap(), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), Activity_Content.class);
+                    intent.putExtra("urls", listfilm.get(position).getLink());
+                    intent.putExtra("name",listfilm.get(position).getName());
+
+                    intent.putExtra("type",type);
+                    intent.putExtra("year",year);
+                    intent.putExtra("decs",decs);
+
+
+                    startActivity(intent);
+
+
                 }
             });
         }

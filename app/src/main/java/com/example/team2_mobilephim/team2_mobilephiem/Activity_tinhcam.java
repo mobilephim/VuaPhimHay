@@ -122,7 +122,7 @@ public class Activity_TinhCam extends android.support.v4.app.Fragment implements
                     String name = jsonObject.getString("name");
                     String link = jsonObject.getString("thumb");
                     String type = jsonObject.getString("type");
-
+                    String urll = jsonObject.getString("url");
                     String year = jsonObject.getString("year");
                     String decs = jsonObject.getString("decs");
                     if(type.equals("Phim Tình Cảm")){
@@ -133,7 +133,7 @@ public class Activity_TinhCam extends android.support.v4.app.Fragment implements
                         phimhot.setType(type);
                         phimhot.setYear(year);
                         phimhot.setDecs(decs);
-
+phimhot.setLink(urll);
                         listfilm.add(phimhot);
 
 

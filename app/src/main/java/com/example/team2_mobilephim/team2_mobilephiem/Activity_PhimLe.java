@@ -128,7 +128,7 @@ public class Activity_PhimLe  extends  android.support.v4.app.Fragment implement
                     String name = jsonObject.getString("name");
                     String link = jsonObject.getString("thumb");
                     String type = jsonObject.getString("type");
-
+                    String urll = jsonObject.getString("url");
                     String year = jsonObject.getString("year");
                     String decs = jsonObject.getString("decs");
                     if(type.equals("Phim Lẻ")){
@@ -139,7 +139,7 @@ public class Activity_PhimLe  extends  android.support.v4.app.Fragment implement
                         phimhot.setType(type);
                         phimhot.setYear(year);
                         phimhot.setDecs(decs);
-
+phimhot.setLink(urll);
                         listfilm.add(phimhot);
 
 
@@ -167,10 +167,11 @@ public class Activity_PhimLe  extends  android.support.v4.app.Fragment implement
                     Intent intent = new Intent(getContext(), Activity_Content.class);
                     intent.putExtra("urls", listfilm.get(position).getLink());
                     intent.putExtra("name",listfilm.get(position).getName());
-
+                    intent.putExtra("thumb",listfilm.get(position).getThumb());
                     intent.putExtra("type",listfilm.get(position).getType());
                     intent.putExtra("year",listfilm.get(position).getYear());
                     intent.putExtra("decs",listfilm.get(position).getDecs());
+
 
                     startActivity(intent);
                 }

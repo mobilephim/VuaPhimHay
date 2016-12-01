@@ -27,7 +27,7 @@
             android:configChanges="orientation|screenSize"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".Activity_Tapphim"
+            android:name=".Activity_TapPhim"
             android:configChanges="orientation|screenSize" />
         <activity
             android:name=".Activity_HanhDong"
@@ -47,6 +47,7 @@
         <activity
             android:name=".Activity_PhimLe"
             android:configChanges="orientation|screenSize"></activity>
+        <activity android:name=".Activity_xemphim"></activity>
     </application>
 
 </manifest>

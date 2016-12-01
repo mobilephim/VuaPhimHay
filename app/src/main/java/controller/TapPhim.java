@@ -5,6 +5,7 @@ package controller;
  */
 
 public class TapPhim {
+
     private String name,tentap,link;
 
     public TapPhim(String name, String tentap, String link) {
@@ -12,6 +13,8 @@ public class TapPhim {
         this.tentap = tentap;
         this.link = link;
     }
+
+
 
     public TapPhim() {
     }
