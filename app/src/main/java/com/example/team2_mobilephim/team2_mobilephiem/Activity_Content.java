@@ -1,5 +1,7 @@
 package com.example.team2_mobilephim.team2_mobilephiem;
 
+import android.content.Intent;
+import android.content.pm.ResolveInfo;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 import android.widget.VideoView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import customadapter.Loadingphim;
 
@@ -25,6 +28,7 @@ public class Activity_Content extends AppCompatActivity {
     String name, type, year, decs;
     ListView lv;
     ArrayList<String> objects;
+    String link;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +46,7 @@ public class Activity_Content extends AppCompatActivity {
             Loadingphim loadingphim = new Loadingphim();
             loadingphim.LaunchBatDiaLog(Activity_Content.this);
 
-            String link = getIntent().getStringExtra("urls");
+            link = getIntent().getStringExtra("urls");
             vview = (VideoView) findViewById(R.id.videoView);
             vview.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
@@ -109,11 +113,29 @@ public class Activity_Content extends AppCompatActivity {
         if (id == R.id.home) {
             this.finish();
         }
+        if (id == R.id.menu_share) {
+            String texttoShare = "Các bạn đang xem phim " + name + " - " + " Vua Phim Hay";
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/plain");
+            // intent.putExtra(Intent.EXTRA_SUBJECT, "Foo bar"); // NB: has no effect!
+            intent.putExtra(Intent.EXTRA_TEXT, texttoShare + "" + link);
+
+            // See if official Facebook app is found
+            boolean facebookAppFound = false;
+            List<ResolveInfo> matches = getPackageManager().queryIntentActivities(intent, 0);
+            for (ResolveInfo info : matches) {
+                if (info.activityInfo.packageName.toLowerCase().startsWith("com.facebook.katana")) {
+                    intent.setPackage(info.activityInfo.packageName);
+                    facebookAppFound = true;
+                    break;
+                }
+            }
+            startActivity(Intent.createChooser(intent,"Share using"));
+
+        }
 
         return super.onOptionsItemSelected(item);
     }
-
-
 
 
 }

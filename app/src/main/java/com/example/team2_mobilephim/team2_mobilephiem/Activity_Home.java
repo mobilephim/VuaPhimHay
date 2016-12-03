@@ -186,7 +186,7 @@ public class Activity_Home extends android.support.v4.app.Fragment implements Se
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     //Toast.makeText(getApplicationContext(), "" + listfilm.get(position).getLink(), Toast.LENGTH_SHORT).show();
                     if(listfilm.get(position).getType().equals("Phim Bộ")){
-                        Intent intent = new Intent(getContext(), Activity_TapPhim.class);
+                        Intent intent = new Intent(getContext(), Activity_tapphim.class);
 
                         intent.putExtra("name",listfilm.get(position).getName());
 

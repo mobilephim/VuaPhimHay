@@ -27,7 +27,7 @@
             android:configChanges="orientation|screenSize"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".Activity_TapPhim"
+            android:name=".Activity_tapphim"
             android:configChanges="orientation|screenSize" />
         <activity
             android:name=".Activity_HanhDong"

@@ -28,7 +28,7 @@ import controller.FilmMaster;
 import customadapter.CustomList;
 
 
-public class Activity_PhimBo extends android.support.v4.app.Fragment implements SearchView.OnQueryTextListener {
+public class Activity_Phimbo extends android.support.v4.app.Fragment implements SearchView.OnQueryTextListener {
     ArrayList<FilmMaster> listfilm = new ArrayList<>();
     private SearchView searchView;
     GridView gridView;
@@ -40,7 +40,7 @@ public class Activity_PhimBo extends android.support.v4.app.Fragment implements 
         View view = inflater.inflate(R.layout.activity_phimbo, container, false);
 
         gridView = (GridView) view.findViewById(R.id.gridView_phimbo);
-        new Activity_PhimBo.DogetData().execute("http://hoangthong.website/app/");
+        new Activity_Phimbo.DogetData().execute("http://hoangthong.website/app/");
         setHasOptionsMenu(true);
         return view;
     }
@@ -156,7 +156,7 @@ public class Activity_PhimBo extends android.support.v4.app.Fragment implements 
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                    Intent intent = new Intent(getContext(), Activity_TapPhim.class);
+                    Intent intent = new Intent(getContext(), Activity_tapphim.class);
 
                     intent.putExtra("name",listfilm.get(position).getName());
 

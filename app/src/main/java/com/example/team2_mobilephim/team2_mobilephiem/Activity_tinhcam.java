@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import controller.FilmMaster;
 import customadapter.CustomList;
 
-public class Activity_TinhCam extends android.support.v4.app.Fragment implements SearchView.OnQueryTextListener {
+public class Activity_tinhcam extends android.support.v4.app.Fragment implements SearchView.OnQueryTextListener {
     ArrayList<FilmMaster> listfilm = new ArrayList<>();
     private SearchView searchView;
     GridView gridView ;
@@ -36,7 +36,7 @@ public class Activity_TinhCam extends android.support.v4.app.Fragment implements
         View view= inflater.inflate(R.layout.activity_tinhcam,container,false);
 
         gridView=(GridView)view.findViewById(R.id.gridView_tinhcam);
-        new Activity_TinhCam.DogetData().execute("http://hoangthong.website/app/");
+        new Activity_tinhcam.DogetData().execute("http://hoangthong.website/app/");
         setHasOptionsMenu(true);
         return view;
 
@@ -133,7 +133,7 @@ public class Activity_TinhCam extends android.support.v4.app.Fragment implements
                         phimhot.setType(type);
                         phimhot.setYear(year);
                         phimhot.setDecs(decs);
-phimhot.setLink(urll);
+                        phimhot.setLink(urll);
                         listfilm.add(phimhot);
 
 

@@ -22,7 +22,7 @@ import controller.FilmMaster;
 public class CustomList extends BaseAdapter {
     Context context;
     int resource;
-    ArrayList<FilmMaster> list ;
+    ArrayList<FilmMaster> list;
 
     public CustomList(Context context, int resource, ArrayList<FilmMaster> list) {
         this.context = context;
@@ -52,11 +52,11 @@ public class CustomList extends BaseAdapter {
 
         TextView name = (TextView) convertView.findViewById(R.id.cus_name);
         TextView neww = (TextView) convertView.findViewById(R.id.type1);
-        if(list.get(position).getYear().equals("2016")){
+        if (list.get(position).getYear().equals("2016")) {
             neww.setText("HOT *");
 
         }
-        if(list.get(position).getYear().equals("2017")){
+        if (list.get(position).getYear().equals("2017")) {
             neww.setText("New ***");
 
         }
@@ -64,10 +64,11 @@ public class CustomList extends BaseAdapter {
         ImageView img = (ImageView) convertView.findViewById(R.id.cus_imageview);
         type.setText(list.get(position).getType());
         name.setText(list.get(position).getName());
-        Picasso.with(context).load(list.get(position).getThumb()).resize(340, 360).centerCrop().into(img);
+        Picasso.with(context).load(list.get(position).getThumb()).resize(520, 480).centerCrop().into(img);
         return convertView;
     }
-    public void setFilter(ArrayList<FilmMaster> newList){
+
+    public void setFilter(ArrayList<FilmMaster> newList) {
         list = new ArrayList<>();
         list.addAll(newList);
         notifyDataSetChanged();
