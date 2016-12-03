@@ -1,11 +1,16 @@
 package com.example.team2_mobilephim.team2_mobilephiem;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,7 +27,9 @@ import org.json.JSONObject;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import controller.FilmMaster;
 import customadapter.CustomList;
@@ -33,6 +40,8 @@ public class Activity_Home extends android.support.v4.app.Fragment implements Se
     ArrayList<FilmMaster> listfilm = new ArrayList<>();
     GridView gridView;
     CustomList customList;
+    int count = 0;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -42,7 +51,8 @@ public class Activity_Home extends android.support.v4.app.Fragment implements Se
         setHasOptionsMenu(true);
         return view;
     }
-    public void onCreateOptionsMenu (Menu menu, MenuInflater inflater) {
+
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 
         //inflater.inflate(R.menu.main, menu); // removed to not double the menu items
         MenuItem item = menu.findItem(R.id.menu_seach);
@@ -53,8 +63,7 @@ public class Activity_Home extends android.support.v4.app.Fragment implements Se
         sv.setIconifiedByDefault(false);
 
 
-
-        super.onCreateOptionsMenu(menu,inflater);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     @Override
@@ -66,12 +75,11 @@ public class Activity_Home extends android.support.v4.app.Fragment implements Se
     @Override
     public boolean onQueryTextChange(String newText) {
         newText = newText.toLowerCase();
-        ArrayList<FilmMaster>  newlist = new ArrayList<>();
-        for(FilmMaster a : listfilm){
+        ArrayList<FilmMaster> newlist = new ArrayList<>();
+        for (FilmMaster a : listfilm) {
             String name = a.getName().toLowerCase();
-            if(name.contains(newText)){
+            if (name.contains(newText)) {
                 newlist.add(a);
-
 
 
             }
@@ -82,7 +90,6 @@ public class Activity_Home extends android.support.v4.app.Fragment implements Se
 
         return true;
     }
-
 
 
     class DogetData extends AsyncTask<String, Integer, ArrayList<FilmMaster>> {
@@ -135,6 +142,31 @@ public class Activity_Home extends android.support.v4.app.Fragment implements Se
                     phimhot.setDecs(decs);
 
                     listfilm.add(phimhot);
+                    Date myDate = new Date();
+                    SimpleDateFormat sm = new SimpleDateFormat("mm-dd-yyyy");
+                    // myDate is the java.util.Date in yyyy-mm-dd format
+                    // Converting it into String using formatter
+                    String strDate = sm.format(myDate);
+                    if (year.equals("strDate")) {
+
+                        Intent intent = new Intent(getContext(), MainActivity.class);
+                        PendingIntent Penmainhome = PendingIntent.getActivity(getContext(), 0, intent, 0);
+
+                        count++;
+
+                        Notification notification = new NotificationCompat.Builder(getContext())
+                                .setContentTitle("Vua Phim hay")
+                                .setContentText("" + " Thông báo  Phim mới")
+                                .setSmallIcon(R.mipmap.ic_launcher)
+                                .setNumber(count)
+                                .setAutoCancel(true)
+                             .setContentIntent(Penmainhome)
+                                //  .addAction(R.mipmap.ic_launcher,"Mở",Penmainhomedelect)
+                                .build();
+                        NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+                        notificationManager.notify(1, notification);
+                    }
+
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -147,21 +179,34 @@ public class Activity_Home extends android.support.v4.app.Fragment implements Se
         protected void onPostExecute(ArrayList<FilmMaster> values) {
             super.onPostExecute(values);
             pbloading.dismiss();
-             customList = new CustomList(getContext(), R.layout.activity_customfilm, listfilm);
+            customList = new CustomList(getContext(), R.layout.activity_customfilm, listfilm);
             gridView.setAdapter(customList);
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     //Toast.makeText(getApplicationContext(), "" + listfilm.get(position).getLink(), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getContext(), Activity_Content.class);
-                    intent.putExtra("urls", listfilm.get(position).getLink());
-                    intent.putExtra("name", listfilm.get(position).getName());
-                    intent.putExtra("type", listfilm.get(position).getType());
-                    intent.putExtra("year", listfilm.get(position).getYear());
-                    intent.putExtra("decs", listfilm.get(position).getDecs());
+                    if(listfilm.get(position).getType().equals("Phim Bộ")){
+                        Intent intent = new Intent(getContext(), Activity_TapPhim.class);
+
+                        intent.putExtra("name",listfilm.get(position).getName());
+
+                        intent.putExtra("type",listfilm.get(position).getType());
+                        intent.putExtra("year",listfilm.get(position).getYear());
+                        intent.putExtra("decs",listfilm.get(position).getDecs());
+
+                        startActivity(intent);
+
+                    }else {
+                        Intent intent = new Intent(getContext(), Activity_Content.class);
+                        intent.putExtra("urls", listfilm.get(position).getLink());
+                        intent.putExtra("name", listfilm.get(position).getName());
+                        intent.putExtra("type", listfilm.get(position).getType());
+                        intent.putExtra("year", listfilm.get(position).getYear());
+                        intent.putExtra("decs", listfilm.get(position).getDecs());
 
 
-                    startActivity(intent);
+                        startActivity(intent);
+                    }
                 }
             });
         }

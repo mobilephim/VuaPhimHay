@@ -14,7 +14,7 @@
         android:id="@+id/type"
         android:layout_width="115dp"
         android:layout_height="30dp"
-
+        android:textStyle="italic"
         android:background="#80000000"
         android:padding="7dp"
         android:text="phim bo"

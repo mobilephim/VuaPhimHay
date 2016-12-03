@@ -1,29 +1,30 @@
 package com.example.team2_mobilephim.team2_mobilephiem;
 
-import android.content.Context;
 import android.media.MediaPlayer;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.MediaController;
 import android.widget.TabHost;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.VideoView;
+
+import java.util.ArrayList;
 
 import customadapter.Loadingphim;
 
-public class Activity_Content extends AppCompatActivity  {
+public class Activity_Content extends AppCompatActivity {
     TabHost tabhost;
     VideoView vview;
     MediaController mediaController;
     TextView ten, theloai, nam, mota;
     String name, type, year, decs;
+    ListView lv;
+    ArrayList<String> objects;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +36,12 @@ public class Activity_Content extends AppCompatActivity  {
         theloai = (TextView) findViewById(R.id.tvtheloai);
         nam = (TextView) findViewById(R.id.tvnamsx);
         mota = (TextView) findViewById(R.id.tvmota);
+        lv = (ListView) findViewById(R.id.lvsevetapphim);
 
         try {
             Loadingphim loadingphim = new Loadingphim();
             loadingphim.LaunchBatDiaLog(Activity_Content.this);
-            checkInternetConnection();
+
             String link = getIntent().getStringExtra("urls");
             vview = (VideoView) findViewById(R.id.videoView);
             vview.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
@@ -68,10 +70,10 @@ public class Activity_Content extends AppCompatActivity  {
         tab1.setIndicator("Information");
         host.addTab(tab1);
 
-        tab1 = host.newTabSpec("Server");
-        tab1.setContent(R.id.tab2);
-        tab1.setIndicator("Server");
-        host.addTab(tab1);
+        TabHost.TabSpec tab2 = host.newTabSpec("Server");
+        tab2.setContent(R.id.tab2);
+        tab2.setIndicator("Server");
+        host.addTab(tab2);
 
         name = getIntent().getStringExtra("name");
         ten.setText(name);
@@ -81,7 +83,15 @@ public class Activity_Content extends AppCompatActivity  {
         nam.setText(year);
         decs = getIntent().getStringExtra("decs");
         mota.setText(decs);
+        if (type.equals("Phim Bộ")) {
+            objects = (ArrayList<String>) getIntent().getSerializableExtra("sampleObject");
+            ArrayAdapter customTapPhim = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, objects);
+            lv.setAdapter(customTapPhim);
+        }
+
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -91,7 +101,7 @@ public class Activity_Content extends AppCompatActivity  {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         return true;
     }
-    
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -102,33 +112,6 @@ public class Activity_Content extends AppCompatActivity  {
 
         return super.onOptionsItemSelected(item);
     }
-    private boolean checkInternetConnection() {
-        // Lấy ra bộ quản lý kết nối.
-        ConnectivityManager connManager =
-                (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        // Thông tin mạng đang kích hoạt.
-        NetworkInfo networkInfo = connManager.getActiveNetworkInfo();
-
-        if (networkInfo == null) {
-            Toast.makeText(this, "Không có kết nối vui lòng thử lại", Toast.LENGTH_LONG).show();
-            return false;
-        }
-
-        if (!networkInfo.isConnected()) {
-            Toast.makeText(this, "Đã kết nối", Toast.LENGTH_LONG).show();
-            return false;
-        }
-
-        if (!networkInfo.isAvailable()) {
-            Toast.makeText(this, "Kết nối không khả dụng", Toast.LENGTH_LONG).show();
-            return false;
-        }
-
-        return true;
-    }
-
-
 
 
 

@@ -28,6 +28,7 @@ public class Activity_TapPhim extends AppCompatActivity {
     CustomTapPhim tapPhim;
     String name, type, year, decs;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,7 +118,7 @@ public class Activity_TapPhim extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), Activity_Content.class);
                     intent.putExtra("urls", listfilm.get(position).getLink());
                     intent.putExtra("name",listfilm.get(position).getName());
-
+                    intent.putExtra("sampleObject", mangtapphim);
                     intent.putExtra("type",type);
                     intent.putExtra("year",year);
                     intent.putExtra("decs",decs);
