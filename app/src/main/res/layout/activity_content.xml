@@ -18,7 +18,7 @@
             android:layout_width="fill_parent"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_height="wrap_content"
+            android:layout_height="250dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             />
@@ -75,14 +75,14 @@
                                         android:layout_height="wrap_content"
                                         android:text="Tên phim :"
                                         android:textColor="#FFF"
-                                        android:paddingTop="20dp"
+                                        android:paddingTop="10dp"
                                         android:paddingLeft="10dp"
                                         ></TextView>
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:textColor="#FFF"
-                                        android:paddingTop="20dp"
+                                        android:paddingTop="10dp"
                                         android:paddingLeft="10dp"
                                         android:id="@+id/tvphim"
                                         android:textStyle="bold"></TextView>
@@ -99,14 +99,14 @@
                                         android:layout_height="wrap_content"
                                         android:text="Thể loại :"
                                         android:textColor="#FFF"
-                                        android:paddingTop="20dp"
+                                        android:paddingTop="10dp"
                                         android:paddingLeft="10dp"
                                         ></TextView>
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:textColor="#FFF"
-                                        android:paddingTop="20dp"
+                                        android:paddingTop="10dp"
                                         android:paddingLeft="10dp"
                                         android:id="@+id/tvtheloai"></TextView>
                                 </LinearLayout>
@@ -122,14 +122,14 @@
                                         android:layout_height="wrap_content"
                                         android:text="Năm Sản Xuất :"
                                         android:textColor="#FFF"
-                                        android:paddingTop="20dp"
+                                        android:paddingTop="10dp"
                                         android:paddingLeft="10dp"
                                         ></TextView>
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:textColor="#FFF"
-                                        android:paddingTop="20dp"
+                                        android:paddingTop="10dp"
                                         android:paddingLeft="10dp"
                                         android:id="@+id/tvnamsx"></TextView>
                                 </LinearLayout>
@@ -139,14 +139,14 @@
                                     android:layout_height="wrap_content"
                                     android:text="Mô Tả "
                                     android:textColor="#FFF"
-                                    android:paddingTop="20dp"
+                                    android:paddingTop="10dp"
                                     android:paddingLeft="10dp"
                                     ></TextView>
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#FFF"
-                                    android:paddingTop="20dp"
+                                    android:paddingTop="10dp"
                                     android:paddingLeft="10dp"
                                     android:id="@+id/tvmota"></TextView>
 

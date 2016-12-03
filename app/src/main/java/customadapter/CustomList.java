@@ -64,7 +64,7 @@ public class CustomList extends BaseAdapter {
         ImageView img = (ImageView) convertView.findViewById(R.id.cus_imageview);
         type.setText(list.get(position).getType());
         name.setText(list.get(position).getName());
-        Picasso.with(context).load(list.get(position).getThumb()).resize(520, 480).centerCrop().into(img);
+        Picasso.with(context).load(list.get(position).getThumb()).resize(510, 650).centerCrop().into(img);
         return convertView;
     }
 

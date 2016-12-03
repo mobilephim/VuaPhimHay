@@ -13,7 +13,7 @@
     <TextView
         android:id="@+id/type"
         android:layout_width="115dp"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:textStyle="italic"
         android:background="#80000000"
         android:padding="7dp"
@@ -26,8 +26,7 @@
         android:layout_height="30dp"
         android:paddingTop="5dp"
         android:textStyle="bold|italic"
-
-       android:paddingLeft="120dp"
+        android:paddingLeft="120dp"
         android:text="New"
         android:textColor="#EE0000"
         android:textSize="13sp" />
@@ -35,7 +34,7 @@
     <TextView
         android:id="@+id/cus_name"
         android:layout_width="170dp"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
        android:layout_alignParentBottom="true"
         android:background="#80000000"
         android:padding="7dp"
