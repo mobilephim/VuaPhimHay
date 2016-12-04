@@ -96,7 +96,7 @@ public class Activity_tapphim extends AppCompatActivity {
                         tapPhim.setLink(link);
 
                         listfilm.add(tapPhim);
-                        mangtapphim.add(tentap);
+                        mangtapphim.add(link);
                     }
                 }
             } catch (Exception e) {
@@ -119,6 +119,7 @@ public class Activity_tapphim extends AppCompatActivity {
                     intent.putExtra("urls", listfilm.get(position).getLink());
                     intent.putExtra("name",listfilm.get(position).getName());
                     intent.putExtra("sampleObject", mangtapphim);
+
                     intent.putExtra("type",type);
                     intent.putExtra("year",year);
                     intent.putExtra("decs",decs);

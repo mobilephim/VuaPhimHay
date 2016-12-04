@@ -6,10 +6,10 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.GridView;
 import android.widget.MediaController;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import customadapter.Loadingphim;
+import customadapter.cutom_tapphim_tabsever;
 
 public class Activity_Content extends AppCompatActivity {
     TabHost tabhost;
@@ -26,8 +27,9 @@ public class Activity_Content extends AppCompatActivity {
     MediaController mediaController;
     TextView ten, theloai, nam, mota;
     String name, type, year, decs;
-    ListView lv;
+    GridView lv;
     ArrayList<String> objects;
+
     String link;
 
     @Override
@@ -40,7 +42,7 @@ public class Activity_Content extends AppCompatActivity {
         theloai = (TextView) findViewById(R.id.tvtheloai);
         nam = (TextView) findViewById(R.id.tvnamsx);
         mota = (TextView) findViewById(R.id.tvmota);
-        lv = (ListView) findViewById(R.id.lvsevetapphim);
+        lv  = (GridView) findViewById(R.id.lvsevetapphim);
 
         try {
             Loadingphim loadingphim = new Loadingphim();
@@ -89,8 +91,10 @@ public class Activity_Content extends AppCompatActivity {
         mota.setText(decs);
         if (type.equals("Phim Bộ")) {
             objects = (ArrayList<String>) getIntent().getSerializableExtra("sampleObject");
-            ArrayAdapter customTapPhim = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, objects);
-            lv.setAdapter(customTapPhim);
+            Log.d("aaa",""+objects);
+            cutom_tapphim_tabsever arrayAdapter = new cutom_tapphim_tabsever(getApplicationContext(), R.layout.cutom_tapphim, objects);
+            lv.setAdapter(arrayAdapter);
+
         }
 
 
