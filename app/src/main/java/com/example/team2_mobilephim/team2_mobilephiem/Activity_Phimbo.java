@@ -155,14 +155,13 @@ public class Activity_Phimbo extends android.support.v4.app.Fragment implements 
             gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent = new Intent(getContext(), Activity_Content.class);
+                    intent.putExtra("urls", listfilm.get(position).getLink());
+                    intent.putExtra("name", listfilm.get(position).getName());
+                    intent.putExtra("type", listfilm.get(position).getType());
+                    intent.putExtra("year", listfilm.get(position).getYear());
+                    intent.putExtra("decs", listfilm.get(position).getDecs());
 
-                    Intent intent = new Intent(getContext(), Activity_tapphim.class);
-
-                    intent.putExtra("name",listfilm.get(position).getName());
-
-                    intent.putExtra("type",listfilm.get(position).getType());
-                    intent.putExtra("year",listfilm.get(position).getYear());
-                    intent.putExtra("decs",listfilm.get(position).getDecs());
 
                     startActivity(intent);
                 }

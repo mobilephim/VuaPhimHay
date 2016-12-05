@@ -185,18 +185,10 @@ public class Activity_Home extends android.support.v4.app.Fragment implements Se
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     //Toast.makeText(getApplicationContext(), "" + listfilm.get(position).getLink(), Toast.LENGTH_SHORT).show();
-                    if(listfilm.get(position).getType().equals("Phim Bộ")){
-                        Intent intent = new Intent(getContext(), Activity_tapphim.class);
 
-                        intent.putExtra("name",listfilm.get(position).getName());
 
-                        intent.putExtra("type",listfilm.get(position).getType());
-                        intent.putExtra("year",listfilm.get(position).getYear());
-                        intent.putExtra("decs",listfilm.get(position).getDecs());
 
-                        startActivity(intent);
 
-                    }else {
                         Intent intent = new Intent(getContext(), Activity_Content.class);
                         intent.putExtra("urls", listfilm.get(position).getLink());
                         intent.putExtra("name", listfilm.get(position).getName());
@@ -206,7 +198,7 @@ public class Activity_Home extends android.support.v4.app.Fragment implements Se
 
 
                         startActivity(intent);
-                    }
+
                 }
             });
         }

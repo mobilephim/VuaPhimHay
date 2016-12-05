@@ -14,6 +14,8 @@ import com.example.team2_mobilephim.team2_mobilephiem.R;
 
 import java.util.ArrayList;
 
+import controller.TapPhim;
+
 /**
  * Created by tuandeptrai on 04/12/2016.
  */
@@ -21,9 +23,9 @@ import java.util.ArrayList;
 public class cutom_tapphim_tabsever extends BaseAdapter {
     Activity context;
     int resource;
-    ArrayList<String> phims = new ArrayList<>();
+    ArrayList<TapPhim> phims = new ArrayList<>();
 
-    public cutom_tapphim_tabsever(Activity context, int resource, ArrayList<String> phims) {
+    public cutom_tapphim_tabsever(Activity context, int resource, ArrayList<TapPhim> phims) {
         this.context = context;
         this.resource = resource;
         this.phims = phims;
@@ -54,9 +56,9 @@ public class cutom_tapphim_tabsever extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, Activity_Content.class);
-                intent.putExtra("urls", phims.get(position));
+                intent.putExtra("urls", phims.get(position).getLink());
                 intent.putExtra("type","Phim Bộ");
-                intent.putExtra("sampleObject",phims);
+
                 context. startActivity(intent);
             }
         });

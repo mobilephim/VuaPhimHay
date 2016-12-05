@@ -1,9 +1,11 @@
 package com.example.team2_mobilephim.team2_mobilephiem;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -14,21 +16,28 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
+import controller.TapPhim;
 import customadapter.Loadingphim;
 import customadapter.cutom_tapphim_tabsever;
 
 public class Activity_Content extends AppCompatActivity {
     TabHost tabhost;
     VideoView vview;
+    ArrayList<TapPhim> listfilm = new ArrayList<>();
     MediaController mediaController;
     TextView ten, theloai, nam, mota;
     String name, type, year, decs;
     GridView lv;
-    ArrayList<String> objects;
-
+    String dieukien;
     String link;
 
     @Override
@@ -42,6 +51,10 @@ public class Activity_Content extends AppCompatActivity {
         nam = (TextView) findViewById(R.id.tvnamsx);
         mota = (TextView) findViewById(R.id.tvmota);
         lv  = (GridView) findViewById(R.id.lvsevetapphim);
+        Bundle bd = getIntent().getExtras();
+        if (bd != null) {
+            dieukien = bd.getString("name");
+        }
 
         try {
             Loadingphim loadingphim = new Loadingphim();
@@ -88,13 +101,8 @@ public class Activity_Content extends AppCompatActivity {
         nam.setText(year);
         decs = getIntent().getStringExtra("decs");
         mota.setText(decs);
-        if (type.equals("Phim Bộ")) {
-            objects = (ArrayList<String>) getIntent().getSerializableExtra("sampleObject");
 
-            cutom_tapphim_tabsever arrayAdapter = new cutom_tapphim_tabsever(Activity_Content.this, R.layout.cutom_tapphim, objects);
-            lv.setAdapter(arrayAdapter);
-
-        }
+        new Activity_Content.DogetData().execute("http://hoangthong.website/app/filmep.php");
 
 
     }
@@ -139,6 +147,72 @@ public class Activity_Content extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    class DogetData extends AsyncTask<String, Integer, ArrayList<TapPhim>> {
+        String urllink;
+        String result;
+        ProgressDialog pbloading;
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pbloading = new ProgressDialog(Activity_Content.this);
+            pbloading.setMessage("Đang tải phim chờ xíu nhé..");
+            pbloading.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            pbloading.setCancelable(true);
+            pbloading.setCanceledOnTouchOutside(false);
+            pbloading.show();
+        }
+
+        @Override
+        protected ArrayList<TapPhim> doInBackground(String... params) {
+            urllink = params[0];
+            try {
+                URL url = new URL(urllink);
+                URLConnection conn = url.openConnection();
+                InputStream is = conn.getInputStream();
+                result = "";
+                int byteCharacter;
+                while ((byteCharacter = is.read()) != -1) {
+                    result += (char) byteCharacter;
+                }
+
+                JSONArray jsonArray = new JSONArray(result);
+                String chuoi = "";
+                int length = jsonArray.length();
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    String name = jsonObject.getString("name");
+                    String tentap = jsonObject.getString("episode");
+                    String link = jsonObject.getString("url");
+
+                    if (name.equals(dieukien)) {
+                        TapPhim tapPhim = new TapPhim();
+                        tapPhim.setName(name);
+                        tapPhim.setTentap(name+" - "+tentap);
+                        tapPhim.setLink(link);
+
+                        listfilm.add(tapPhim);
+
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return listfilm;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<TapPhim> values) {
+            super.onPostExecute(values);
+            pbloading.dismiss();
+            cutom_tapphim_tabsever cutom_tapphim_tabsever = new cutom_tapphim_tabsever(Activity_Content.this,R.layout.cutom_tapphim,listfilm);
+lv.setAdapter(cutom_tapphim_tabsever);
+
+
+        }
+    }
+
 
 
 }
