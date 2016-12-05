@@ -58,7 +58,7 @@ public class cutom_tapphim_tabsever extends BaseAdapter {
                 Intent intent = new Intent(context, Activity_Content.class);
                 intent.putExtra("urls", phims.get(position).getLink());
                 intent.putExtra("type","Phim Bộ");
-
+                intent.putExtra("name", phims.get(position).getName());
                 context. startActivity(intent);
             }
         });

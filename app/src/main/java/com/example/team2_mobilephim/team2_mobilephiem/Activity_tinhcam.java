@@ -3,8 +3,8 @@ package com.example.team2_mobilephim.team2_mobilephiem;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.annotation.Nullable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
@@ -49,7 +49,7 @@ public class Activity_tinhcam extends android.support.v4.app.Fragment implements
         MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW | MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
         MenuItemCompat.setActionView(item, sv);
         sv.setOnQueryTextListener(this);
-        sv.setIconifiedByDefault(false);
+
 
 
 

@@ -52,7 +52,7 @@ public class Activity_Phimbo extends android.support.v4.app.Fragment implements 
         MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW | MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
         MenuItemCompat.setActionView(item, sv);
         sv.setOnQueryTextListener(this);
-        sv.setIconifiedByDefault(false);
+
 
 
 
