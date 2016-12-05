@@ -6,7 +6,6 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.GridView;
@@ -91,8 +90,8 @@ public class Activity_Content extends AppCompatActivity {
         mota.setText(decs);
         if (type.equals("Phim Bộ")) {
             objects = (ArrayList<String>) getIntent().getSerializableExtra("sampleObject");
-            Log.d("aaa",""+objects);
-            cutom_tapphim_tabsever arrayAdapter = new cutom_tapphim_tabsever(getApplicationContext(), R.layout.cutom_tapphim, objects);
+
+            cutom_tapphim_tabsever arrayAdapter = new cutom_tapphim_tabsever(Activity_Content.this, R.layout.cutom_tapphim, objects);
             lv.setAdapter(arrayAdapter);
 
         }

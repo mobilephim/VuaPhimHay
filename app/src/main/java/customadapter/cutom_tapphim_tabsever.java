@@ -1,13 +1,15 @@
 package customadapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.Toast;
 
+import com.example.team2_mobilephim.team2_mobilephiem.Activity_Content;
 import com.example.team2_mobilephim.team2_mobilephiem.R;
 
 import java.util.ArrayList;
@@ -17,11 +19,11 @@ import java.util.ArrayList;
  */
 
 public class cutom_tapphim_tabsever extends BaseAdapter {
-    Context context;
+    Activity context;
     int resource;
     ArrayList<String> phims = new ArrayList<>();
 
-    public cutom_tapphim_tabsever(Context context, int resource, ArrayList<String> phims) {
+    public cutom_tapphim_tabsever(Activity context, int resource, ArrayList<String> phims) {
         this.context = context;
         this.resource = resource;
         this.phims = phims;
@@ -51,8 +53,11 @@ public class cutom_tapphim_tabsever extends BaseAdapter {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context,phims.get(position),Toast.LENGTH_SHORT).show();
-
+                Intent intent = new Intent(context, Activity_Content.class);
+                intent.putExtra("urls", phims.get(position));
+                intent.putExtra("type","Phim Bộ");
+                intent.putExtra("sampleObject",phims);
+                context. startActivity(intent);
             }
         });
 
