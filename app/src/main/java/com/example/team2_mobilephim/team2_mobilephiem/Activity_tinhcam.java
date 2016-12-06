@@ -1,3 +1,4 @@
+
 package com.example.team2_mobilephim.team2_mobilephiem;
 
 import android.app.ProgressDialog;
@@ -36,7 +37,7 @@ public class Activity_tinhcam extends android.support.v4.app.Fragment implements
         View view= inflater.inflate(R.layout.activity_tinhcam,container,false);
 
         gridView=(GridView)view.findViewById(R.id.gridView_tinhcam);
-        new Activity_tinhcam.DogetData().execute("http://hoangthong.website/app/");
+        new Activity_tinhcam.DogetData().execute("http://hoangthong.website/app/phimtinhcam.php");
         setHasOptionsMenu(true);
         return view;
 
