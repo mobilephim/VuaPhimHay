@@ -165,6 +165,7 @@ public class MainActivity extends AppCompatActivity
                 drawer.closeDrawer(GravityCompat.START);
                 transaction4.commit();
                 ;
+                break;
             case R.id.hoathinh:
                 FragmentTransaction transaction5 = fragmentManager.beginTransaction();
                 Activity_HoatHinh phimhoathinh = new Activity_HoatHinh();
