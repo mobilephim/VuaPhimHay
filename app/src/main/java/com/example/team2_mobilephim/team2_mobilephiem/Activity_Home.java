@@ -98,7 +98,7 @@ public class Activity_Home extends android.support.v4.app.Fragment implements Se
         ProgressDialog pbloading;
 
         @Override
-        protected void onPreExecute() {
+        protected void onPreExecute() {// trước khi làm gì đó thì chạy
             super.onPreExecute();
             pbloading = new ProgressDialog(getContext());
             pbloading.setMessage("Đang tải phim chờ xíu nhé..");
@@ -109,12 +109,12 @@ public class Activity_Home extends android.support.v4.app.Fragment implements Se
         }
 
         @Override
-        protected ArrayList<FilmMaster> doInBackground(String... params) {
+        protected ArrayList<FilmMaster> doInBackground(String... params) {// chay nền
             urllink = params[0];
             try {
                 URL url = new URL(urllink);
-                URLConnection conn = url.openConnection();
-                InputStream is = conn.getInputStream();
+                URLConnection conn = url.openConnection(); // mở kêt nối đến sevaer
+                InputStream is = conn.getInputStream();  // đọc du liệu khi sever tra về
                 result = "";
                 int byteCharacter;
                 while ((byteCharacter = is.read()) != -1) {
@@ -147,7 +147,7 @@ public class Activity_Home extends android.support.v4.app.Fragment implements Se
                     // myDate is the java.util.Date in yyyy-mm-dd format
                     // Converting it into String using formatter
                     String strDate = sm.format(myDate);
-                    if (year.equals("strDate")) {
+                    if (year.equals(strDate)) {
 
                         Intent intent = new Intent(getContext(), MainActivity.class);
                         PendingIntent Penmainhome = PendingIntent.getActivity(getContext(), 0, intent, 0);
@@ -161,7 +161,7 @@ public class Activity_Home extends android.support.v4.app.Fragment implements Se
                                 .setNumber(count)
                                 .setAutoCancel(true)
                              .setContentIntent(Penmainhome)
-                                //  .addAction(R.mipmap.ic_launcher,"Mở",Penmainhomedelect)
+                                //
                                 .build();
                         NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
                         notificationManager.notify(1, notification);
@@ -176,7 +176,7 @@ public class Activity_Home extends android.support.v4.app.Fragment implements Se
         }
 
         @Override
-        protected void onPostExecute(ArrayList<FilmMaster> values) {
+        protected void onPostExecute(ArrayList<FilmMaster> values) { // update lại giao diện
             super.onPostExecute(values);
             pbloading.dismiss();
             customList = new CustomList(getContext(), R.layout.activity_customfilm, listfilm);
